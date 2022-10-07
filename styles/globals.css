@@ -21,4 +21,23 @@ a {
 .font-text{
   font-family: Tahoma,Arial,sans-serif;
 }
+.Renk:hover {
+  background: linear-gradient(to right, #e1e1e1, #ffffff);
+  background-size: 200% 200%;
+  animation: GradientBackground 10s ease infinite;
+}
+
+@keyframes GradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 25% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+
+
+}
 
