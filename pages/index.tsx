@@ -30,7 +30,7 @@ const Home: NextPage = () => {
 
                         <p className='text-center p-4'>
                             <button className="bg-white text-black p-2 px-4 rounded text-sm justify-self-center drop-shadow-md
-                             hover:bg-gray-300  focus:ring-2 focus:ring-blue-400 hover:bg-gradient-to-r from-gray-300 to-white ">
+                             hover:bg-gray-300 focus:ring-2 focus:ring-blue-400 hover:bg-gradient-to-r from-gray-300 to-white ">
                                 Vote for yor team</button></p>
                     </div>
                 </div>
