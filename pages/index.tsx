@@ -1,20 +1,11 @@
 import type {NextPage} from 'next'
-import Head from 'next/head'
+
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+
 import ball from "../images/ball.svg"
 import ReactCountryFlag from "react-country-flag"
 import {countryFlag} from "../components/Flag"
 import {FC} from "react";
-
-const country = [{
-    name: "Germany",
-    vote: 2222
-}, {
-    name: "Qatar ",
-    vote: 2222
-}]
-
 
 const Home: NextPage = () => {
     return (<div className=''>
@@ -27,7 +18,6 @@ const Home: NextPage = () => {
 
                         <p className='text-center md:text-xl text-lg text-white p-3'>Support your team in <br/>
                             <span className='md:text-2xl text-xl  text-white p-2 '>World cup Qutar 2022</span></p>
-
                         <p className='text-center p-4'>
                             <button className="bg-white text-black p-2 px-4 rounded text-sm justify-self-center drop-shadow-md
                              hover:bg-gray-300 focus:ring-2 focus:ring-blue-400 hover:bg-gradient-to-r from-gray-300 to-white ">
