@@ -1,3 +1,3 @@
 export const GlobelVote=()=>{
-    return (<div></div>)
+    return (<div> </div>)
 }
