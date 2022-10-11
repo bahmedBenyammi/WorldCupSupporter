@@ -5,9 +5,17 @@ import Image from 'next/image'
 import ball from "../images/ball.svg"
 import ReactCountryFlag from "react-country-flag"
 import {countryFlag} from "../components/Flag"
-import {FC} from "react";
+import {FC, useState} from "react";
+import {GlobelVote, VoteModle} from "../components/VoteModle";
 
 const Home: NextPage = () => {
+    const [showVote,setShowVote]=useState(false)
+    const showModle = () => {
+      setShowVote(true)
+    }
+    const closeModel = () => {
+      setShowVote(false)
+    }
     return (<div className=''>
             <div className=' h-[25rem] bg-[url("../images/support.jpg")] bg-cover bg-center'>
                 <div className='  object-fill h-full bg-blue-800/80 flex justify-center items-center  '>
@@ -19,7 +27,7 @@ const Home: NextPage = () => {
                         <p className='text-center md:text-xl text-lg text-white p-3'>Support your team in <br/>
                             <span className='md:text-2xl text-xl  text-white p-2 '>World cup Qutar 2022</span></p>
                         <p className='text-center p-4'>
-                            <button className="bg-white text-black p-2 px-4 rounded text-sm justify-self-center drop-shadow-md
+                            <button onClick={showModle} className="bg-white text-black p-2 px-4 rounded text-sm justify-self-center drop-shadow-md
                              hover:bg-gray-300 focus:ring-2 focus:ring-blue-400 hover:bg-gradient-to-r from-gray-300 to-white ">
                                 Vote for yor team</button></p>
                     </div>
@@ -32,6 +40,7 @@ const Home: NextPage = () => {
                 })}
 
             </div>
+            {showVote&&<VoteModle><GlobelVote/></VoteModle>}
         </div>
 
 
