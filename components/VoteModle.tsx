@@ -1,4 +1,7 @@
 import {FC} from "react";
+import {CountryDropdown} from "react-country-region-selector";
+import {CountrySelector,countryList} from "./Flag";
+
 
 
 export const VoteModle: FC<any> = ({children}) => {
@@ -25,17 +28,19 @@ export const GlobelVote = () => {
             vote for team who you gas will be win in Qutar 2022
         </p>
         <form className="flex-row  p-4 px-14 space-y-2">
-            <div className="grid grid-cols-4 items-center w-full justify-center border space-x-4">
-                <label className="font-sans col-span-1 ">Your Country :</label>
-                <input className="p-1 border outline-0 focus:ring-1 focus:ring-blue-40 col-span-3"/>
+            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
+                <label className="font-sans col-span-1 font-semibold ">Your Country :</label>
+                <CountryDropdown classes="p-1 border-r-2 border outline-0 focus:ring-1 focus:ring-blue-400 col-span-3" onChange={(val)=>console.log(val)} value="" />
             </div>
             <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
-                <label className="font-sans ">Email :</label>
-                <input className="p-1 outline-0 focus:ring-1 focus:ring-blue-400  col-span-3"/>
-            </div>
-            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
-                <label className="font-sans ">Vote for :</label>
+                <label className="font-sans font-semibold ">Email :</label>
                 <input className="p-1 border outline-0 focus:ring-1 focus:ring-blue-400 col-span-3"/>
+            </div>
+            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
+                <label className="font-sans font-semibold">Vote for :</label>
+                <CountrySelector country={countryList} className="p-1 border border-r-2 outline-0 focus:ring-1 focus:ring-blue-400 col-span-3"/>
+
+
             </div>
             <div className='flex justify-center pt-4'>
                 <button

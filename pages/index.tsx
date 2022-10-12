@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import ball from "../images/ball.svg"
 import ReactCountryFlag from "react-country-flag"
-import {countryFlag} from "../components/Flag"
+import {Country, countryList} from "../components/Flag"
 import {FC, useState} from "react";
 import {GlobelVote, VoteModle} from "../components/VoteModle";
 
@@ -16,6 +16,7 @@ const Home: NextPage = () => {
     const closeModel = () => {
       setShowVote(false)
     }
+    var c='';
     return (<div className=''>
             <div className=' h-[25rem] bg-[url("../images/support.jpg")] bg-cover bg-center'>
                 <div className='  object-fill h-full bg-blue-800/80 flex justify-center items-center  '>
@@ -35,7 +36,8 @@ const Home: NextPage = () => {
 
             </div>
             <div className="m-4">
-                {Object.keys(countryFlag).map((e, index) => {
+                {countryList.map((e, index) => {
+
                     return <Rank country={e} index={index}/>
                 })}
 
@@ -47,15 +49,15 @@ const Home: NextPage = () => {
     )
 }
 
-const Rank: FC<{ country: string, index: number }> = ({country, index}) => {
+const Rank: FC<{ country: Country, index: number }> = ({country, index}) => {
     return (<div className="flex justify-center items-center m-4 space-x-6 ">
         <div className=' flex justify-center w-1/12'>
             <p className="text-gray-400 md:text-4xl text-xl  font-bold font-sans">{index + '#'}</p>
         </div>
         <div className="flex justify-between w-full border-2 border-blue-300 rounded p-3 Renk  ">
             <div className="flex justify-start items-center space-x-4">
-                <ReactCountryFlag countryCode={countryFlag[country]} svg style={{fontSize: '2em', lineHeight: '2em',}}/>
-                <p className="md:text-xl text-sm">{country}</p>
+                <ReactCountryFlag countryCode={country.short} svg style={{fontSize: '2em', lineHeight: '2em',}}/>
+                <p className="md:text-xl text-sm">{country.name}</p>
             </div>
             <div className="flex justify-start items-center  ">
                 <p className="md:text-xl text-sm">2122</p>
