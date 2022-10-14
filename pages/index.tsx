@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import ball from "../images/ball.svg"
 import ReactCountryFlag from "react-country-flag"
-import {Country, countryList} from "../components/Flag"
+import {Country, teamList} from "../components/Flag"
 import {FC, useState} from "react";
 import {GlobelVote, VoteModle} from "../components/VoteModle";
 
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
 
             </div>
             <div className="m-4">
-                {countryList.map((e, index) => {
+                {teamList.map((e, index) => {
 
                     return <Rank country={e} index={index}/>
                 })}
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
 const Rank: FC<{ country: Country, index: number }> = ({country, index}) => {
     return (<div className="flex justify-center items-center m-4 space-x-6 ">
         <div className=' flex justify-center w-1/12'>
-            <p className="text-gray-400 md:text-4xl text-xl  font-bold font-sans">{index + '#'}</p>
+            <p className="text-gray-400 md:text-4xl text-xl  font-bold font-sans">{(index+1) + '#'}</p>
         </div>
         <div className="flex justify-between w-full border-2 border-blue-300 rounded p-3 Renk  ">
             <div className="flex justify-start items-center space-x-4">
