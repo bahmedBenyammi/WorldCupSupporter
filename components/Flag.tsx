@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import ReactCountryFlag from "react-country-flag";
 import Select from "react-select/base";
 
@@ -205,7 +205,7 @@ export const countryList:Country[]=[
     {name: 'Solomon Islands', short: 'SB'},
     {name: 'Somalia', short: 'SO'},
     {name: 'South Africa', short: 'ZA'},
-    {name: 'South Georgia and the South Sandwich Islands', short: 'GS'},
+    {name: 'South Georgia', short: 'GS'},
     {name: 'Spain', short: 'ES'},
     {name: 'Sri Lanka', short: 'LK'},
     {name: 'Sudan', short: 'SD'},
@@ -274,6 +274,10 @@ export const teamList: Country[] = [{name: 'Qatar', short: 'QA'}, {name: 'German
     short: 'MX'
 }, {name: 'Australia', short: 'AU'}, {name: 'Costa_Rica', short: 'CR'},]
 
+interface CountryShort{
+    [index: string]:string
+}
+export const Short:CountryShort={"Qatar":"QA","Germany":"DE","Denmark":"DK","Brazil":"BR","France":"FR","Belgium":"BE","Croatia":"HR","Spain":"ES","Serbia":"RS","Switzerland":"CH","Netherlands":"NL","Argentina":"AR","Iran":"IR","South_Korea":"KR","Japan":"JP","Saudi_Arabia":"SA","Ecuador":"EC","Uruguay":"UY","Canada":"CA","Ghana":"GH","Senegal":"SN","Portugal":"PT","Poland":"PL","Tunisia":"TN","Morocco":"MA","Cameroon":"CM","USA":"US","Mexico":"MX","Australia":"AU","Costa_Rica":"CR"}
 interface CountrySelectorProps {
     country: Country[],
     className: string
@@ -287,27 +291,30 @@ interface option {
 }
 
 export const CountrySelector: FC<CountrySelectorProps> = ({country, className,handleChangeP,name}) => {
-
+    const [options,setOptions]=useState({}as option[])
     const handleChange=(e:any)=>{
         setValue(e)
         handleChangeP(name,e.name)
     }
-    const options = (): option[] => {
-        return country.map(e => {
-            let option = {
-                value: e.name,
-                label: e.short
-            }
-            return option;}
-        )
-        
-    }
+
+    useEffect(()=>{
+        var short:string='';
+          var  options= country.map(e => {0
+              short =short+JSON.stringify({[e.name.replace(" ","_")]:e.short}).
+              replace('{','').replace('}','')+","
+
+                let option = {value: e.name, label: e.short}
+                return option;})
+        console.log(short)
+        setOptions(options)
+    },[])
+
     const [value,setValue]=useState(null)
     const [open,setOpen]=useState(false)
     const onMenuClose=()=>{setOpen(false)}
     const onMenuOpen=()=>{setOpen(true)}
     return (
-        <Select options={options()} menuIsOpen={open} isSearchable={false } className={className} isMulti={false}
+        <Select options={options} menuIsOpen={open} isSearchable={false } className={className} isMulti={false}
                 inputValue="" onChange={handleChange}    formatOptionLabel={country => (
             <div className="flex space-x-4 items-center">
                 <ReactCountryFlag  countryCode={country?.label} svg style={{fontSize: '1.5em', lineHeight: '1.5em',}}/>
