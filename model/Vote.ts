@@ -21,4 +21,6 @@ const voteShema=new Schema({
         default:false,
     }
 })
+
 export const Vote=models.Vote||model('Vote',voteShema)
+

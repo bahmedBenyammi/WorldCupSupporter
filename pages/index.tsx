@@ -2,12 +2,14 @@ import type {NextPage} from 'next'
 
 import Image from 'next/image'
 
-import ball from "../images/ball.svg"
+import ball from "../images/white-logo.svg"
 import ReactCountryFlag from "react-country-flag"
-import {Country, Short, teamList} from "../components/Flag"
+import {Short} from "../components/Country"
 import {FC, useState} from "react";
 import {Rank} from "../model/Rank"
 import {GlobelVote, VoteModle} from "../components/VoteModle";
+import {GlobalVoteCulc} from "../lib/GlobalVote";
+import {emailConfermation} from "../lib/EmailSender";
 interface Props{
     rank:Rank[]
 }
@@ -21,7 +23,7 @@ const Home: NextPage<Props> = ({rank}) => {
     const closeModel = () => {
       setShowVote(false)
     }
-    var c='';
+
     return (<div className=''>
             <div className=' h-[25rem] bg-[url("../images/support.jpg")] bg-cover bg-center'>
                 <div className='  object-fill h-full bg-blue-800/80 flex justify-center items-center  '>
@@ -33,7 +35,7 @@ const Home: NextPage<Props> = ({rank}) => {
                         <p className='text-center md:text-xl text-lg text-white p-3'>Support your team in <br/>
                             <span className='md:text-2xl text-xl  text-white p-2 '>World cup Qutar 2022</span></p>
                         <p className='text-center p-4'>
-                            <button onClick={showModle} className="bg-white text-black p-2 px-4 rounded text-sm justify-self-center drop-shadow-md
+                            <button onClick={showModle} className="bg-white text-black p-2 px-4 rounded text-sm justify-self-center
                              hover:bg-gray-300 focus:ring-2 focus:ring-blue-400 hover:bg-gradient-to-r from-gray-300 to-white ">
                                 Vote for yor team</button></p>
                     </div>
@@ -48,7 +50,7 @@ const Home: NextPage<Props> = ({rank}) => {
                 })}
 
             </div>
-            {showVote&&<VoteModle><GlobelVote/></VoteModle>}
+            {showVote&&<VoteModle handleClose={closeModel}><GlobelVote/></VoteModle>}
         </div>
 
 
@@ -74,23 +76,14 @@ const Rank: FC<{ country: string, numVote: number,index:number }> = ({country, n
 }
 
 export async function getStaticProps() {
-    const res = await fetch('http://localhost:3000/api/hello')
-    var posts
-    if (res.status===200)
-    { posts= await res.json()
+    const res = await GlobalVoteCulc()
 
     return {
         props: {
-           rank: posts,
+           rank: res,
         },
-        // Next.js will attempt to re-generate the page:
-        // - When a request comes in
-        // - At most once every 10 seconds
-        revalidate: 10, // In seconds
-    }}
-    else {
-        console.log("error")
-        return "error"
+        revalidate: 60*5, // In seconds
     }
 }
+
 export default Home

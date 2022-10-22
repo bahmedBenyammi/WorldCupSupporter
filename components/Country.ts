@@ -1,8 +1,3 @@
-import {FC, useEffect, useState} from "react";
-import ReactCountryFlag from "react-country-flag";
-import Select from "react-select/base";
-
-
 export interface Country {
     name: string,
     short: string
@@ -261,9 +256,7 @@ export const teamList: Country[] = [{name: 'Qatar', short: 'QA'}, {name: 'German
     name: 'Iran',
     short: 'IR'
 }, {name: 'South_Korea', short: 'KR'}, {name: 'Japan', short: 'JP'}, {
-    name: 'Saudi_Arabia',
-    short: 'SA'
-}, {name: 'Ecuador', short: 'EC'}, {name: 'Uruguay', short: 'UY'}, {name: 'Canada', short: 'CA'}, {
+    name: 'Saudi_Arabia', short: 'SA'}, {name: 'Ecuador', short: 'EC'}, {name: 'Uruguay', short: 'UY'}, {name: 'Canada', short: 'CA'}, {
     name: 'Ghana',
     short: 'GH'
 }, {name: 'Senegal', short: 'SN'}, {name: 'Portugal', short: 'PT'}, {name: 'Poland', short: 'PL'}, {
@@ -274,53 +267,13 @@ export const teamList: Country[] = [{name: 'Qatar', short: 'QA'}, {name: 'German
     short: 'MX'
 }, {name: 'Australia', short: 'AU'}, {name: 'Costa_Rica', short: 'CR'},]
 
+export const checkCountry=(country:string)=>{
+    return countryList.some(e=>e.name===country)
+}
+export const checkTeam=(country:string)=>{
+    return teamList.some(e=>e.name===country)
+}
 interface CountryShort{
     [index: string]:string
 }
 export const Short:CountryShort={"Qatar":"QA","Germany":"DE","Denmark":"DK","Brazil":"BR","France":"FR","Belgium":"BE","Croatia":"HR","Spain":"ES","Serbia":"RS","Switzerland":"CH","Netherlands":"NL","Argentina":"AR","Iran":"IR","South_Korea":"KR","Japan":"JP","Saudi_Arabia":"SA","Ecuador":"EC","Uruguay":"UY","Canada":"CA","Ghana":"GH","Senegal":"SN","Portugal":"PT","Poland":"PL","Tunisia":"TN","Morocco":"MA","Cameroon":"CM","USA":"US","Mexico":"MX","Australia":"AU","Costa_Rica":"CR"}
-interface CountrySelectorProps {
-    country: Country[],
-    className: string
-    name:string
-    handleChangeP:(name: string,value:string) =>void
-}
-
-interface option {
-    value: string,
-    label: any
-}
-
-export const CountrySelector: FC<CountrySelectorProps> = ({country, className,handleChangeP,name}) => {
-    const [options,setOptions]=useState({}as option[])
-    const handleChange=(e:any)=>{
-        setValue(e)
-        handleChangeP(name,e.name)
-    }
-
-    useEffect(()=>{
-        var short:string='';
-          var  options= country.map(e => {0
-              short =short+JSON.stringify({[e.name.replace(" ","_")]:e.short}).
-              replace('{','').replace('}','')+","
-
-                let option = {value: e.name, label: e.short}
-                return option;})
-        console.log(short)
-        setOptions(options)
-    },[])
-
-    const [value,setValue]=useState(null)
-    const [open,setOpen]=useState(false)
-    const onMenuClose=()=>{setOpen(false)}
-    const onMenuOpen=()=>{setOpen(true)}
-    return (
-        <Select options={options} menuIsOpen={open} isSearchable={false } className={className} isMulti={false}
-                inputValue="" onChange={handleChange}    formatOptionLabel={country => (
-            <div className="flex space-x-4 items-center">
-                <ReactCountryFlag  countryCode={country?.label} svg style={{fontSize: '1.5em', lineHeight: '1.5em',}}/>
-                <span>{country?.value}</span>
-            </div>
-        )}
-                onMenuClose={onMenuClose} onMenuOpen={onMenuOpen} value={value} onInputChange={()=>{}}/>
-    )
-}
