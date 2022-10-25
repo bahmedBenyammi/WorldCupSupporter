@@ -9,7 +9,7 @@ import {FC, useState} from "react";
 import {Rank} from "../model/Rank"
 import {GlobelVote, VoteModle} from "../components/VoteModle";
 import {GlobalVoteCulc} from "../lib/GlobalVote";
-import {emailConfermation} from "../lib/EmailSender";
+
 interface Props{
     rank:Rank[]
 }
@@ -29,7 +29,7 @@ const Home: NextPage<Props> = ({rank}) => {
                 <div className='  object-fill h-full bg-blue-800/80 flex justify-center items-center  '>
                     <div >
                         <div className="h-20 relative">
-                            <Image src={ball} width={"80"} height={"80"} layout={"fill"}/>
+                            <Image src={ball} width={"80"} height={"80"} layout={"fill"} alt={"logo"}/>
                         </div>
 
                         <p className='text-center md:text-xl text-lg text-white p-3'>Support your team in <br/>
