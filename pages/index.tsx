@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
 
 import Image from 'next/image'
-
+import Head from 'next/head';
 import ball from "../images/white-logo.svg"
 import ReactCountryFlag from "react-country-flag"
 import {Short} from "../components/Country"
@@ -25,11 +25,16 @@ const Home: NextPage<Props> = ({rank}) => {
     }
 
     return (<div className=''>
+            <Head>
+                <title>world cup supporter</title>
+                <meta name="description" content="support team in world cup 2022,guess who will win that world cup" key="desc" />
+                <meta property="og:title" content="world cup Qatar 2022" />
+            </Head>
             <div className=' h-[25rem] bg-[url("../images/support.jpg")] bg-cover bg-center'>
                 <div className='  object-fill h-full bg-blue-800/80 flex justify-center items-center  '>
                     <div >
                         <div className="h-20 relative">
-                            <Image src={ball} width={"80"} height={"80"} layout={"fill"} alt={"logo"}/>
+                            <Image src={ball}  layout={"fill"} alt={"logo"}/>
                         </div>
 
                         <p className='text-center md:text-xl text-lg text-white p-3'>Support your team in <br/>

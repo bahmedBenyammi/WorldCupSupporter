@@ -8,7 +8,7 @@ export default function Navbar (props:any){
         <nav className="flex items-center justify-between flex-wrap bg-white shadow-sm border-b-gray-400 z-10 sticky top-0  h-16">
             <div className="flex items-center  ">
                 <div className="h-12 relative w-12 mx-4">
-                    <Image width={"80"} height={"80"} layout={"fill"} src={logo}  alt="logo" />
+                    <Image layout={"fill"} src={logo}  alt="logo" />
                 </div>
                 <div className=''>
                     <p className='text-xl font-sans font-bold font-nav'>Football Supporter</p>
