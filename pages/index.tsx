@@ -28,7 +28,7 @@ const Home: NextPage<Props> = ({rank}) => {
             <Head>
                 <title>world cup supporter</title>
                 <meta name="description" content="support team in world cup 2022,guess who will win that world cup" key="desc" />
-                <meta property="og:title" content="world cup Qatar 2022" />
+                <meta property="og:title" content="World cup Qatar 2022" />
             </Head>
             <div className=' h-[25rem] bg-[url("../images/support.jpg")] bg-cover bg-center'>
                 <div className='  object-fill h-full bg-blue-800/80 flex justify-center items-center  '>
@@ -55,7 +55,7 @@ const Home: NextPage<Props> = ({rank}) => {
                 })}
 
             </div>
-            {showVote&&<VoteModle handleClose={closeModel}><GlobelVote/></VoteModle>}
+            {showVote&&<VoteModle handleClose={closeModel}><GlobelVote /></VoteModle>}
         </div>
 
 

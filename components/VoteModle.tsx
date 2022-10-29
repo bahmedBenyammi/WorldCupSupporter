@@ -13,7 +13,7 @@ let State = {
 }
 
 interface VoteProps {
-    changeStatus: (e: string) => void
+    changeStatus?: (e: string) => void
 }
 
 export const VoteModle: FC<any> = ({children, handleClose}) => {
@@ -70,7 +70,8 @@ export const GlobelVote: FC<VoteProps> = ({changeStatus}) => {
 
         if (!checkDomain(from.email))
             console.log('errore')
-        changeStatus('wait')
+        if(!changeStatus)
+            return;
         fetch('/api/GlobalVoteSubmit', {
             headers: {
                 'Content-Type': 'application/json',
