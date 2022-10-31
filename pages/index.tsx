@@ -81,6 +81,8 @@ const Rank: FC<{ country: string, numVote: number,index:number }> = ({country, n
 }
 
 export async function getStaticProps() {
+    console.log(process.env)
+    console.log(process.env.MONGO_URI)
     const res = await GlobalVoteCulc()
 
     return {
