@@ -5,7 +5,7 @@ import {GlobalVote} from "../../model/GlobalVote";
 import db from "../../model/Bd";
 import {emailConfermation} from "../../lib/EmailSender";
 import bcrypt from 'bcrypt'
-db.getInestence()
+db.getInestence().then(()=>console.log("database get inestence"))
 
 export default async function handler(
     req: NextApiRequest,
