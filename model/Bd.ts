@@ -4,7 +4,10 @@ class db{
     static inestence:Mongoose;
     static async getInestence() {
         if (this.inestence == null)
-         this.inestence = await mongoose.connect(process.env.MONGO_URI as string);
+         this.inestence = await mongoose.connect(process.env.MONGO_URI as string,{
+
+             serverSelectionTimeoutMS: 9000,
+         });
 
         return this.inestence
     }
