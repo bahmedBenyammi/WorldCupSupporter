@@ -21,6 +21,6 @@ const voteShema=new Schema({
         default:false,
     }
 })
-export const GlobalVote=models.GlobalVote||model('GlobalVote',voteShema)
-//  export const GlobalVote=model('GlobalVote',voteShema)
+// export const GlobalVote=models.GlobalVote||model('GlobalVote',voteShema)
+ export const GlobalVote=model('GlobalVote',voteShema)
 

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "npm run build && next start  -H 0.0.0.0 -p ${PORT:-8080}"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",

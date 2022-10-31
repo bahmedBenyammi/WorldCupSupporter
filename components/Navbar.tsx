@@ -1,11 +1,38 @@
-import styles from '../styles/Home.module.css'
+
 import Link from "next/link";
 import logo from "../images/logo.svg"
 import Image from "next/image";
+import {MouseEvent, useState} from "react";
+import {useRouter} from "next/router";
 
-export default function Navbar (props:any){
+const linkStyle=" font-text font-black w-auto p-5 flex  " +
+    "justify-center items-center  hover:text-blue-500 hover:bg-gray-200" +
+    "md:border-none border-b border-b-gray-200  "
+
+const active='text-blue-500'
+const links=[{
+    text:"Support your team",
+    link:"/"
+},{
+    text:"Matches",
+    link:"/matches"
+}
+]
+export default function Navbar (){
+    const [show ,setShow]=useState(false)
+    const diplay = (show) ? "" : "hidden" ;
+    const focus = (show) ?  "hover:bg-gray-100 focus:outline-none  focus:ring-gray-200" :""
+    const router = useRouter();
+    const isActive=(link:string)=> {
+        if ( link===router.pathname)
+        return linkStyle +" "+active
+        return linkStyle}
+    const handleClick = (e:MouseEvent) => {
+      setShow(!show)
+    }
     return(
-        <nav className="flex items-center justify-between flex-wrap bg-white shadow-sm border-b-gray-400 z-10 sticky top-0  h-16">
+        <nav className="flex  items-center justify-between  bg-white
+        md:shadow-sm z-10 sticky block top-0 m-0 p-0 border-b border-b-gray-200">
             <div className="flex items-center h-full  ">
                 <div className="h-12 relative w-12 mx-4">
                     <Image layout={"fill"} src={logo}  alt="logo" />
@@ -14,28 +41,29 @@ export default function Navbar (props:any){
                     <p className='md:text-xl text-lg font-sans font-bold font-nav'>Football Supporter</p>
                 </div>
             </div>
-            <button data-collapse-toggle="navbar-default" type="button"
-                    className="inline-flex items-center p-2 mr-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                    aria-controls="navbar-default" aria-expanded="false">
+            <button type="button" onClick={handleClick}
+                    className={"inline-flex items-center p-2 mr-3 text-sm " +
+                        "text-gray-500 rounded-lg md:hidden  "+focus}
+                    >
                 <span className="sr-only">Open main menu</span>
                 <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                          clip-rule="evenodd"></path>
+                    <path
+    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+    />
                 </svg>
             </button>
-            <div className='md:h-full md:mr-4  md:block md:w-auto w-full ' id="navbar-default">
-                <div className="flex flex-col  md:p-0 md:m-0 p-4 mt-4 shadow  w-full md:flex-row md:h-full md:shadow-none md:space-x-2 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white ">
+            <div className={'md:h-full md:mr-4 md:bg-none md:border-none border-b border-b-gray-200  bg-white md:block md:w-auto w-full '+ diplay} id="navbar-default">
+                <div className="flex flex-col  ms:border-b-gray-200 md:p-0 md:m-0  shadow
+                 w-full md:flex-row md:h-full md:shadow-none md:space-x-2 md:mt-0 md:text-sm
+                 md:font-medium md:border-0 md:bg-white ">
+                    {links.map(e =>{ return( <Link href={e.link} key={e.link}>
+                        <a className={isActive(e.link)}>
+                            {e.text}</a>
+                    </Link>)})
+                    }
 
-                    <Link href="/" >
-                        <a className=" font-text font-black  w-auto p-5   flex  justify-center items-center border-l border-white hover:text-blue-500 ">
-                            Support your team</a>
-                    </Link>
-                    <Link href="/matches">
-                        <a className="font-text font-bold w-auto p-5   flex  justify-center items-center border-l border-white hover:text-blue-500 ">
-                            Matches</a>
-                    </Link>
+
                 </div>
 
             </div>

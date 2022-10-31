@@ -20,11 +20,11 @@ export const GlobalVoteCulc = async (): Promise<Rank[]> => {
     countVote.sort((a, b) => {
         return b.numVote - a.numVote
     })
-    console.log(countVote)
+
     return countVote;
 
 }
-export const confirmeGlobal=async (email: string, id: string) => {
+export const confirmeGlobal=async (email: string, id: string):Promise<string> => {
     let vote = await GlobalVote.findOne({email: email})
     if (vote === null)
         return "not found"
@@ -33,5 +33,6 @@ export const confirmeGlobal=async (email: string, id: string) => {
         return "not found"
     vote.isComfire = true
     vote.save()
-    return vote.country
+
+    return vote.country!
 }
