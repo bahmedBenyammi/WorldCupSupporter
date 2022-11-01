@@ -6,7 +6,7 @@ class db{
         if (this.inestence == null)
          this.inestence = await mongoose.connect(process.env.MONGO_URI as string,{
 
-             serverSelectionTimeoutMS: 9000,
+             serverSelectionTimeoutMS: 20000,
          });
 
         return this.inestence
