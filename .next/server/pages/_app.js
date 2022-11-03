@@ -37,7 +37,7 @@ const router_namespaceObject = require("next/router");
 
 
 
-const linkStyle = " font-text font-black w-auto p-5 flex  " + "justify-center items-center  hover:text-blue-500 hover:bg-gray-200" + "md:border-none border-b border-b-gray-200  ";
+const linkStyle = " font-text font-black w-auto p-4 flex  " + "justify-center items-center  hover:text-blue-500 hover:bg-gray-200" + "md:border-none border-b border-b-gray-200  ";
 const active = "text-blue-500";
 const links = [
     {
@@ -61,67 +61,73 @@ function Navbar() {
     const handleClick = (e)=>{
         setShow(!show);
     };
-    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("nav", {
+    return /*#__PURE__*/ jsx_runtime_.jsx("nav", {
         className: "flex items-center justify-between bg-white md:shadow-sm z-10 sticky block top-0 m-0 p-0 border-b border-b-gray-200",
-        children: [
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                className: "flex items-center h-full ",
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "h-12 relative w-12 mx-4",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
-                            layout: "fill",
-                            src: logo,
-                            alt: "logo"
-                        })
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        className: "",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("p", {
-                            className: "md:text-xl text-lg font-sans font-bold font-nav",
-                            children: "Football Supporter"
-                        })
-                    })
-                ]
-            }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("button", {
-                type: "button",
-                onClick: handleClick,
-                className: "inline-flex items-center p-2 mr-3 text-sm " + "text-gray-500 rounded-lg md:hidden  " + focus,
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
-                        className: "sr-only",
-                        children: "Open main menu"
-                    }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("svg", {
-                        className: "w-6 h-6",
-                        "aria-hidden": "true",
-                        fill: "currentColor",
-                        viewBox: "0 0 20 20",
-                        xmlns: "http://www.w3.org/2000/svg",
-                        children: /*#__PURE__*/ jsx_runtime_.jsx("path", {
-                            d: "M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        })
-                    })
-                ]
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                className: "md:h-full md:mr-4 md:bg-none md:border-none border-b border-b-gray-200  bg-white md:block md:w-auto w-full " + diplay,
-                id: "navbar-default",
-                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                    className: "flex flex-col ms:border-b-gray-200 md:p-0 md:m-0 shadow w-full md:flex-row md:h-full md:shadow-none md:space-x-2 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white ",
-                    children: links.map((e)=>{
-                        return /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                            href: e.link,
-                            children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
-                                className: isActive(e.link),
-                                children: e.text
+        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            className: "h-16 container flex flex-wrap justify-between items-center mx-auto",
+            children: [
+                /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                    href: "/",
+                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "flex items-center h-full cursor-pointer ",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "h-12 mr-2 relative w-12",
+                                children: /*#__PURE__*/ jsx_runtime_.jsx((image_default()), {
+                                    layout: "fill",
+                                    src: logo,
+                                    alt: "logo"
+                                })
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "",
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                    className: "md:text-xl text-lg font-sans font-bold font-nav",
+                                    children: "Football Supporter"
+                                })
                             })
-                        }, e.link);
+                        ]
+                    })
+                }),
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("button", {
+                    type: "button",
+                    onClick: handleClick,
+                    className: "inline-flex items-center p-2 mr-3 text-sm " + "text-gray-500 rounded-lg md:hidden  " + focus,
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                            className: "sr-only",
+                            children: "Open main menu"
+                        }),
+                        /*#__PURE__*/ jsx_runtime_.jsx("svg", {
+                            className: "w-6 h-6",
+                            "aria-hidden": "true",
+                            fill: "currentColor",
+                            viewBox: "0 0 20 20",
+                            xmlns: "http://www.w3.org/2000/svg",
+                            children: /*#__PURE__*/ jsx_runtime_.jsx("path", {
+                                d: "M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                            })
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "md:h-full md:mr-4 md:bg-none md:border-none border-b border-b-gray-200 " + "bg-white md:block md:w-auto w-full " + diplay,
+                    id: "navbar-default",
+                    children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "flex flex-col ms:border-b-gray-200 md:p-0 md:m-0 shadow w-full md:flex-row md:h-full md:shadow-none md:space-x-2 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white ",
+                        children: links.map((e)=>{
+                            return /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                href: e.link,
+                                children: /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                                    className: isActive(e.link),
+                                    children: e.text
+                                })
+                            }, e.link);
+                        })
                     })
                 })
-            })
-        ]
+            ]
+        })
     });
 }
 

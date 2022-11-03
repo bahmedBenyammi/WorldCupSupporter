@@ -20,7 +20,7 @@ const voteShema=new Schema({
         type:Boolean,
         default:false,
     }
-})
-// export const GlobalVote=models.GlobalVote||model('GlobalVote',voteShema)
- export const GlobalVote=model('GlobalVote',voteShema)
+},{ timestamps: { createdAt: 'created_at' } })
+export const GlobalVote=models.GlobalVote||model('GlobalVote',voteShema)
+//  export const GlobalVote=model('GlobalVote',voteShema)
 

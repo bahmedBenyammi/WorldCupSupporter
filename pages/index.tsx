@@ -3,12 +3,13 @@ import type {NextPage} from 'next'
 import Image from 'next/image'
 import Head from 'next/head';
 import ball from "../images/white-logo.svg"
-import ReactCountryFlag from "react-country-flag"
 import {Short} from "../components/Country"
 import {FC, useState} from "react";
 import {Rank} from "../model/Rank"
-import {GlobelVote, VoteModle} from "../components/VoteModle";
+import {VoteModle} from "../components/VoteModle";
+import {GlobelVoteForm} from "../components/FormVote";
 import {GlobalVoteCulc} from "../lib/GlobalVote";
+import Flag from "react-flagkit";
 
 interface Props{
     rank:Rank[]
@@ -47,6 +48,12 @@ const Home: NextPage<Props> = ({rank}) => {
                 </div>
 
             </div>
+            <div className="bg-gray-100 w-full h-40 flex justify-center items-center">
+                 <div className="text-center space-y-2 p-5">
+                     <p className='text-2xl font-bold font-sans'>Global rank of Teams by supporters</p>
+                     <p className="font-bold">This updated every 5 minutes</p>
+                 </div>
+            </div>
             <div className="m-4">
                 {
                     rank.map((e, index) => {
@@ -55,7 +62,7 @@ const Home: NextPage<Props> = ({rank}) => {
                 })}
 
             </div>
-            {showVote&&<VoteModle handleClose={closeModel}><GlobelVote /></VoteModle>}
+            {showVote&&<VoteModle handleClose={closeModel}><GlobelVoteForm /></VoteModle>}
         </div>
 
 
@@ -70,7 +77,8 @@ const Rank: FC<{ country: string, numVote: number,index:number }> = ({country, n
         </div>
         <div className="flex justify-between w-full border-2 border-blue-300 rounded p-3 Renk  ">
             <div className="flex justify-start items-center space-x-4">
-                <ReactCountryFlag countryCode={Short[country.replace(" ","_")]} svg style={{fontSize: '2em', lineHeight: '2em',}}/>
+                <Flag country={Short[country.replace(" ","_")]} />
+
                 <p className="md:text-xl text-sm">{country}</p>
             </div>
             <div className="flex justify-start items-center  ">
@@ -81,8 +89,6 @@ const Rank: FC<{ country: string, numVote: number,index:number }> = ({country, n
 }
 
 export async function getStaticProps() {
-    console.log(process.env)
-    console.log(process.env.MONGO_URI)
     const res = await GlobalVoteCulc()
 
     return {

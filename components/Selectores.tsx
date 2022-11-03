@@ -1,7 +1,8 @@
 import {FC, useEffect, useState} from "react";
-import ReactCountryFlag from "react-country-flag";
+
 import Select from "react-select/base";
 import {Country} from "./Country";
+import Flag from "react-flagkit";
 
 
 interface CountrySelectorProps {
@@ -20,7 +21,6 @@ export const CountrySelector: FC<CountrySelectorProps> = ({country, className,ha
     const [options,setOptions]=useState({}as option[])
     const handleChange=(e:any)=>{
         setValue(e)
-        console.log(e)
         handleChangeP(name,e.value)
     }
 
@@ -32,7 +32,7 @@ export const CountrySelector: FC<CountrySelectorProps> = ({country, className,ha
 
                 let option = {value: e.name, label: e.short}
                 return option;})
-        console.log(short)
+
         setOptions(options)
     },[])
 
@@ -44,7 +44,7 @@ export const CountrySelector: FC<CountrySelectorProps> = ({country, className,ha
         <Select options={options} menuIsOpen={open} isSearchable={false } className={className} isMulti={false}
                 inputValue="" onChange={handleChange}    formatOptionLabel={country => (
             <div className="flex space-x-4 items-center">
-                <ReactCountryFlag  countryCode={country?.label} svg style={{fontSize: '1.5em', lineHeight: '1.5em',}}/>
+                <Flag country={country?.label} />
                 <span>{country?.value}</span>
             </div>
         )}

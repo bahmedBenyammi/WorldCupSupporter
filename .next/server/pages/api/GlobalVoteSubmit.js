@@ -1106,9 +1106,17 @@ const teamList = [
         short: "AU"
     },
     {
-        name: "Costa_Rica",
+        name: "Costa Rica",
         short: "CR"
-    }, 
+    },
+    {
+        name: "England",
+        short: "GB-ENG"
+    },
+    {
+        name: "Wales",
+        short: "GB-WLS"
+    }
 ];
 const checkCountry = (country)=>{
     return countryList.some((e)=>e.name === country);
@@ -1146,7 +1154,9 @@ const Short = {
     "USA": "US",
     "Mexico": "MX",
     "Australia": "AU",
-    "Costa_Rica": "CR"
+    "Costa_Rica": "CR",
+    "England": "GB-ENG",
+    "Wales": "GB-WLS"
 };
 
 
@@ -1277,9 +1287,13 @@ const voteShema = new mongoose__WEBPACK_IMPORTED_MODULE_0__.Schema({
         type: Boolean,
         default: false
     }
+}, {
+    timestamps: {
+        createdAt: "created_at"
+    }
 });
-// export const GlobalVote=models.GlobalVote||model('GlobalVote',voteShema)
-const GlobalVote = (0,mongoose__WEBPACK_IMPORTED_MODULE_0__.model)("GlobalVote", voteShema);
+const GlobalVote = mongoose__WEBPACK_IMPORTED_MODULE_0__.models.GlobalVote || (0,mongoose__WEBPACK_IMPORTED_MODULE_0__.model)("GlobalVote", voteShema) //  export const GlobalVote=model('GlobalVote',voteShema)
+;
 
 
 /***/ }),
@@ -1309,18 +1323,13 @@ _lib_EmailSender__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.
 
 _model_Bd__WEBPACK_IMPORTED_MODULE_2__/* ["default"].getInestence */ .Z.getInestence().then(()=>console.log("database get inestence"));
 async function handler(req, res) {
-    console.log(req.method);
     if (req.method != "POST") return res.status(500).json({
         error: "bad request"
     });
     let { email , country , support  } = req.body;
-    console.log(req.body);
     if (!email || !country || !support) return res.status(500).json({
         error: "bad request"
     });
-    console.log((0,_components_domaisList__WEBPACK_IMPORTED_MODULE_5__/* .checkDomain */ .N)(email));
-    console.log((0,_components_Country__WEBPACK_IMPORTED_MODULE_0__/* .checkCountry */ .dP)(country));
-    console.log((0,_components_Country__WEBPACK_IMPORTED_MODULE_0__/* .checkTeam */ .Qx)(support));
     if (!(0,_components_domaisList__WEBPACK_IMPORTED_MODULE_5__/* .checkDomain */ .N)(email) || !(0,_components_Country__WEBPACK_IMPORTED_MODULE_0__/* .checkCountry */ .dP)(country) || !(0,_components_Country__WEBPACK_IMPORTED_MODULE_0__/* .checkTeam */ .Qx)(support)) return res.status(500).json({
         error: "bad request"
     });
@@ -1333,12 +1342,13 @@ async function handler(req, res) {
         vote = await vote.save();
         const salt = await bcrypt__WEBPACK_IMPORTED_MODULE_4___default().genSalt(10);
         let id = await bcrypt__WEBPACK_IMPORTED_MODULE_4___default().hash(vote._id.toString(), salt);
-        let link = "http://localhost:3000/confirme?email=" + email + "&id=" + id;
+        let link = process.env.URL + "/confirme?email=" + email + "&id=" + id;
         (0,_lib_EmailSender__WEBPACK_IMPORTED_MODULE_3__/* .emailConfermation */ .e)(email, link, support);
         return res.status(200).json({
             message: "success"
         });
     } catch (e) {
+        console.log("ok");
         return res.status(500).json({
             error: "email exist"
         });

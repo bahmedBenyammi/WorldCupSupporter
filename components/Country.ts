@@ -265,7 +265,7 @@ export const teamList: Country[] = [{name: 'Qatar', short: 'QA'}, {name: 'German
 }, {name: 'Morocco', short: 'MA'}, {name: 'Cameroon', short: 'CM'}, {name: 'USA', short: 'US'}, {
     name: 'Mexico',
     short: 'MX'
-}, {name: 'Australia', short: 'AU'}, {name: 'Costa_Rica', short: 'CR'},]
+}, {name: 'Australia', short: 'AU'}, {name: 'Costa Rica', short: 'CR'},{name: 'England', short: 'GB-ENG'},{name: 'Wales', short: 'GB-WLS'}]
 
 export const checkCountry=(country:string)=>{
     return countryList.some(e=>e.name===country)
@@ -277,4 +277,7 @@ interface CountryShort{
     [index: string]:string
 }
 export const Short:CountryShort={"Qatar":"QA","Germany":"DE","Denmark":"DK","Brazil":"BR","France":"FR","Belgium":"BE",
-    "Croatia":"HR","Spain":"ES","Serbia":"RS","Switzerland":"CH","Netherlands":"NL","Argentina":"AR","Iran":"IR","South_Korea":"KR","Japan":"JP","Saudi_Arabia":"SA","Ecuador":"EC","Uruguay":"UY","Canada":"CA","Ghana":"GH","Senegal":"SN","Portugal":"PT","Poland":"PL","Tunisia":"TN","Morocco":"MA","Cameroon":"CM","USA":"US","Mexico":"MX","Australia":"AU","Costa_Rica":"CR"}
+    "Croatia":"HR","Spain":"ES","Serbia":"RS","Switzerland":"CH","Netherlands":"NL","Argentina":"AR","Iran":"IR",
+    "South_Korea":"KR","Japan":"JP","Saudi_Arabia":"SA","Ecuador":"EC","Uruguay":"UY","Canada":"CA","Ghana":"GH",
+    "Senegal":"SN","Portugal":"PT","Poland":"PL","Tunisia":"TN","Morocco":"MA","Cameroon":"CM","USA":"US","Mexico":"MX",
+    "Australia":"AU","Costa_Rica":"CR","England":"GB-ENG","Wales":"GB-WLS"}

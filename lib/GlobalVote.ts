@@ -2,25 +2,23 @@ import {Rank} from "../model/Rank";
 import {GlobalVote} from "../model/GlobalVote";
 import db from "../model/Bd";
 import bcrypt from "bcrypt";
+import {teamList} from "../components/Country";
 
-const country: string[] = ['Qatar', 'Germany', 'Denmark', 'Brazil', 'France', 'Belgium',
-    'Croatia', 'Spain', 'Serbia', 'Switzerland', 'Netherlands', 'Argentina', 'Iran', 'South Korea',
-    'Japan', 'Saudi Arabia', 'Ecuador', 'Uruguay', 'Canada', 'Ghana', 'Senegal', 'Portugal', 'Poland',
-    'Tunisia', 'Morocco', 'Cameroon', 'USA', 'Mexico', 'Australia', 'Costa Rica']
+
 
 export const GlobalVoteCulc = async (): Promise<Rank[]> => {
     await db.getInestence()
     var countVote: Rank[] = [];
-    for (const e of country) {
-        let v = await GlobalVote.count({isComfire: true, support: e})
-        let r: Rank = {country: e, numVote: v}
+    for (const e of teamList) {
+        let v = await GlobalVote.count({isComfire: true, support: e.name})
+        let r: Rank = {country: e.name ,numVote: v}
         countVote.push(r)
     }
 
     countVote.sort((a, b) => {
         return b.numVote - a.numVote
     })
-
+    console.log("global rank cacul")
     return countVote;
 
 }
@@ -33,6 +31,6 @@ export const confirmeGlobal=async (email: string, id: string):Promise<string> =>
         return "not found"
     vote.isComfire = true
     vote.save()
-
-    return vote.country!
+    console.log("vote confirm : "+vote._id.toString() )
+    return vote.support!
 }

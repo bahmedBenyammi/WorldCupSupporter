@@ -15,12 +15,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(997);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_country_flag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5534);
-/* harmony import */ var react_country_flag__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_country_flag__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1664);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lib_GlobalVote__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9646);
-/* harmony import */ var _components_Country__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9436);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1664);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _lib_GlobalVote__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9646);
+/* harmony import */ var _components_Country__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9436);
+/* harmony import */ var react_flagkit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3214);
+/* harmony import */ var react_flagkit__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_flagkit__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -28,12 +28,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const Confirme = ({ country  })=>{
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "flex fill-page justify-center items-center border border-red-800",
+        className: "flex fill-page justify-center items-center ",
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "flex flex-col items-center justify-center h-full border border-red-800",
+            className: "flex flex-col items-center justify-center h-full ",
             children: [
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: "flex justify-center items-center space-x-3 m-12",
+                    className: "flex justify-center items-center space-x-3 m-4 ",
                     children: [
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                             className: "text-3xl font-serif font-sans font-bold",
@@ -46,25 +46,27 @@ const Confirme = ({ country  })=>{
                     ]
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                    children: "you support"
+                    className: "text-xl font-bold",
+                    children: "you support in world cup 2022"
                 }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_country_flag__WEBPACK_IMPORTED_MODULE_1___default()), {
-                    countryCode: _components_Country__WEBPACK_IMPORTED_MODULE_4__/* .Short */ .m4[country.replace(" ", "_")],
-                    svg: true,
-                    style: {
-                        fontSize: "8em",
-                        lineHeight: "8em"
-                    }
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_flagkit__WEBPACK_IMPORTED_MODULE_4___default()), {
+                    className: "h-40 w-40",
+                    country: _components_Country__WEBPACK_IMPORTED_MODULE_3__/* .Short */ .m4[country.replace(" ", "_")]
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    className: "text-xl m-2 font-bold",
                     children: country
                 }),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                    className: "m-2 font-bold",
                     children: [
-                        "consulte the global ranking from ",
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_2___default()), {
+                        "consulte the global ranking from",
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
                             href: "/",
-                            children: "here"
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                className: "text-blue-500 hover:cursor-pointer",
+                                children: " here"
+                            })
                         })
                     ]
                 })
@@ -81,7 +83,8 @@ const getServerSideProps = async ({ query  })=>{
         }
     };
     if (!email || !id) return redirect;
-    let confirme = await (0,_lib_GlobalVote__WEBPACK_IMPORTED_MODULE_3__/* .confirmeGlobal */ .u)(email, id);
+    let confirme = await (0,_lib_GlobalVote__WEBPACK_IMPORTED_MODULE_2__/* .confirmeGlobal */ .u)(email, id);
+    console.log(confirme);
     if (confirme === "not found") return redirect;
     return {
         props: {
@@ -283,10 +286,10 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ 5534:
+/***/ 3214:
 /***/ ((module) => {
 
-module.exports = require("react-country-flag");
+module.exports = require("react-flagkit");
 
 /***/ }),
 
@@ -304,7 +307,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [598,676,664,519], () => (__webpack_exec__(632)));
+var __webpack_exports__ = __webpack_require__.X(0, [598,676,664,646], () => (__webpack_exec__(632)));
 module.exports = __webpack_exports__;
 
 })();

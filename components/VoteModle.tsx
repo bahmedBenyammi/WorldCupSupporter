@@ -1,20 +1,11 @@
-import React, {ChangeEvent, FC, FormEvent, useState} from "react";
-import {CountrySelector} from "./Selectores";
-import {checkDomain} from "./domaisList";
-import {countryList, teamList} from "./Country";
+import React, {FC,  useState} from "react";
+
 import SadFace from "../images/sadFace.svg"
 import Error from "../images/Error.svg"
 import Image from "next/image";
+import {VoteProps} from "./voteProps";
 
-let State = {
-    email: "",
-    country: "",
-    support: ""
-}
 
-interface VoteProps {
-    changeStatus?: (e: string) => void
-}
 
 export const VoteModle: FC<any> = ({children, handleClose}) => {
     const [status, setStatus] = useState('');
@@ -27,7 +18,12 @@ export const VoteModle: FC<any> = ({children, handleClose}) => {
         }
         return child;
     });
-
+    const body=()=>{
+        return <div className="m-4">
+            {childrenWithProps}
+            <p className="text-center italic">Note: we only accept popularise email domain name </p>
+        </div>
+    }
     return (<>
         <div
             className="justify-center  border items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
@@ -47,7 +43,7 @@ export const VoteModle: FC<any> = ({children, handleClose}) => {
                         waiting() : status === 'success' ?
                             success() : status === 'exist' ?
                                 existEmail() : status === 'error' ?
-                                    error() : childrenWithProps}
+                                    error() : <div> {body()}</div>}
                 </div>
             </div>
         </div>
@@ -55,83 +51,7 @@ export const VoteModle: FC<any> = ({children, handleClose}) => {
     </>)
 }
 
-export const GlobelVote: FC<VoteProps> = ({changeStatus}) => {
-    const [from, setFrom] = useState(State);
-    const handlerChage = (e: ChangeEvent<HTMLInputElement>) => {
-        setFrom({...from, [e.target.name]: e.target.value})
-    }
-    const handleSelectChange = (name: string, value: string): void => {
-        console.log(value)
-        setFrom({...from, [name]: value})
-        console.log(from)
-    }
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
 
-        if (!checkDomain(from.email))
-            console.log('errore')
-        if(!changeStatus)
-            return;
-        fetch('/api/GlobalVoteSubmit', {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            body: JSON.stringify(from)
-
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            let mes = data.message
-            if (mes == 'success')
-                changeStatus('success')
-            else if (mes === 'email exist')
-                changeStatus('exit')
-            else
-                changeStatus('error')
-
-
-        })
-            .catch(e => {
-                console.log(e)
-            })
-
-
-    }
-
-    return (<div className="w-full p-4 scroll-mr-0">
-        <p className="text-center font-sans font-black text-[30px] p-2">Support your team</p>
-        <p className="text-center font-sans p-2 ">support your team in world cup 2022 <br/>
-            vote for team who you gas will be win in Qutar 2022
-        </p>
-        <form className="flex-row md:p-4 p-0 md:px-14 px-0 space-y-2 " onSubmit={handleSubmit}>
-            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4 ">
-                <label className="font-sans col-span-1 font-semibold  ">Country :</label>
-
-                <CountrySelector handleChangeP={handleSelectChange} name="country" country={countryList}
-                                 className="col-span-3 appearance-none"/>
-            </div>
-            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
-                <label className="font-sans font-semibold ">Email :</label>
-                <input className="p-1 border outline-0 focus:ring-1 focus:ring-blue-400 col-span-3" name="email"
-                       onChange={handlerChage}
-                       value={from.email} type="email"/>
-            </div>
-            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
-                <label className="font-sans font-semibold">Support :</label>
-                <CountrySelector handleChangeP={handleSelectChange} name="support" country={teamList}
-                                 className="col-span-3 appearance-none"/>
-
-
-            </div>
-            <div className='flex justify-center pt-4'>
-                <button
-                    className='bg-black text-white font-normal p-2 px-10 hover:bg-gray-900 justify-self-center'>Vote
-                </button>
-            </div>
-        </form>
-    </div>)
-}
 const success = () => {
     return (
         <div className="flex w-full h-96 p-8 justify-center items-center">
