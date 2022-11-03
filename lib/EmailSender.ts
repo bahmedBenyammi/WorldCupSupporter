@@ -10,14 +10,14 @@ const client = new SMTPClient({
 export const emailConfermation=(email:string,link:string,support:string)=>{
    client.send({
        text: 'i hope this works',
-       from:process.env.EMAIL_USERNAME as string,
+       from:"Football Supputers",
        to:email,
-       subject:"confirm",
+       subject:"confirm your vote",
        attachment: [
            { data: templet(support,link), alternative: true },
        ],
-   },(err, message) => {
-       console.log(err || message);
+   },(err) => {
+       console.log(err);
    })
 
 }
@@ -104,7 +104,7 @@ const templet=(suppot:string,link:string):string=>{return ('<!DOCTYPE html PUBLI
     '    <table role="presentation" width="100%">\n' +
     '        <tr>\n' +
 
-    '            <td align="center" style="color: white;">\n' +
+    '            <td align="center" style="color: white; padding:15px">\n' +
     '                <img alt="logo" title="logo" height="87"' +
     ' style="display: block" src="https://drive.google.com/uc?export=view&id=1hRfvw2UzszrNtm86rBflsYdFddksY1HG" width="100px" align="middle">\n' +
 

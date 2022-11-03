@@ -43,7 +43,7 @@ export const GlobelVoteForm: FC<VoteProps> = ({changeStatus}) => {
         }).then(res => {
             return res.json()
         }).then(data => {
-            let mes = data.error
+            let mes = data.message
 
             if (mes == 'success')
                 changeStatus('success')
