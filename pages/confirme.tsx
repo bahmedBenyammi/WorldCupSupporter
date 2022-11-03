@@ -4,12 +4,18 @@ import Link from "next/link";
 import {confirmeGlobal} from "../lib/GlobalVote";
 import {Short} from "../components/Country";
 import Flag from "react-flagkit";
+import Head from "next/head";
 interface PropsConfirme{
     country:string
 }
  const Confirme: NextPage<PropsConfirme> = ({country}) => {
 
-    return(<div className='flex fill-page justify-center items-center  '>
+    return(
+        <>
+            <Head>
+
+                <title>Confirme Vote</title></Head>
+        <div className='flex fill-page justify-center items-center  '>
            <div className='flex flex-col items-center justify-center h-full  '>
                <div className='flex justify-center items-center space-x-3 m-4 '>
                <p className="text-3xl font-serif font-sans font-bold">Congratulation </p>
@@ -22,7 +28,7 @@ interface PropsConfirme{
                    <Link href={'/'} ><span className="text-blue-500 hover:cursor-pointer"> here</span></Link>
                </p>
            </div>
-    </div>)
+    </div></>)
 }
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
     let {email,id}=query

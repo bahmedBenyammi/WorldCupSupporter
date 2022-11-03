@@ -5,7 +5,7 @@ exports.id = 405;
 exports.ids = [405];
 exports.modules = {
 
-/***/ 4204:
+/***/ 3358:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -22,9 +22,9 @@ var jsx_runtime_ = __webpack_require__(997);
 // EXTERNAL MODULE: ./node_modules/next/image.js
 var next_image = __webpack_require__(5675);
 var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
-;// CONCATENATED MODULE: external "next/head"
-const head_namespaceObject = require("next/head");
-var head_default = /*#__PURE__*/__webpack_require__.n(head_namespaceObject);
+// EXTERNAL MODULE: external "next/head"
+var head_ = __webpack_require__(968);
+var head_default = /*#__PURE__*/__webpack_require__.n(head_);
 ;// CONCATENATED MODULE: ./images/white-logo.svg
 /* harmony default export */ const white_logo = ({"src":"/_next/static/media/white-logo.e50d5712.svg","height":104,"width":108});
 // EXTERNAL MODULE: ./components/Country.ts
@@ -502,7 +502,7 @@ const Home = ({ rank  })=>{
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)((head_default()), {
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("title", {
-                        children: "world cup supporter"
+                        children: "Football supporter"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("meta", {
                         name: "description",
@@ -692,6 +692,13 @@ module.exports = require("next/dist/shared/lib/utils.js");
 
 /***/ }),
 
+/***/ 968:
+/***/ ((module) => {
+
+module.exports = require("next/head");
+
+/***/ }),
+
 /***/ 6689:
 /***/ ((module) => {
 
@@ -720,7 +727,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [598,675,646], () => (__webpack_exec__(4204)));
+var __webpack_exports__ = __webpack_require__.X(0, [598,675,646], () => (__webpack_exec__(3358)));
 module.exports = __webpack_exports__;
 
 })();

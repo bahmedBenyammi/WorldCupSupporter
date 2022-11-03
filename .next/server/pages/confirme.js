@@ -21,57 +21,69 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Country__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9436);
 /* harmony import */ var react_flagkit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3214);
 /* harmony import */ var react_flagkit__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_flagkit__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(968);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
 
 
 const Confirme = ({ country  })=>{
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        className: "flex fill-page justify-center items-center ",
-        children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "flex flex-col items-center justify-center h-full ",
-            children: [
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                    className: "flex justify-center items-center space-x-3 m-4 ",
+    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_head__WEBPACK_IMPORTED_MODULE_5___default()), {
+                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("title", {
+                    children: "Confirme Vote"
+                })
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                className: "flex fill-page justify-center items-center ",
+                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "flex flex-col items-center justify-center h-full ",
                     children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                            className: "text-3xl font-serif font-sans font-bold",
-                            children: "Congratulation "
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "flex justify-center items-center space-x-3 m-4 ",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                    className: "text-3xl font-serif font-sans font-bold",
+                                    children: "Congratulation "
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                    className: "rotate-6 text-3xl font-bold",
+                                    children: "!"
+                                })
+                            ]
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                            className: "rotate-6 text-3xl font-bold",
-                            children: "!"
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                    className: "text-xl font-bold",
-                    children: "you support in world cup 2022"
-                }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_flagkit__WEBPACK_IMPORTED_MODULE_4___default()), {
-                    className: "h-40 w-40",
-                    country: _components_Country__WEBPACK_IMPORTED_MODULE_3__/* .Short */ .m4[country.replace(" ", "_")]
-                }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                    className: "text-xl m-2 font-bold",
-                    children: country
-                }),
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                    className: "m-2 font-bold",
-                    children: [
-                        "consulte the global ranking from",
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
-                            href: "/",
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
-                                className: "text-blue-500 hover:cursor-pointer",
-                                children: " here"
-                            })
+                            className: "text-xl font-bold",
+                            children: "you support in world cup 2022"
+                        }),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((react_flagkit__WEBPACK_IMPORTED_MODULE_4___default()), {
+                            className: "h-40 w-40",
+                            country: _components_Country__WEBPACK_IMPORTED_MODULE_3__/* .Short */ .m4[country.replace(" ", "_")]
+                        }),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                            className: "text-xl m-2 font-bold",
+                            children: country
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                            className: "m-2 font-bold",
+                            children: [
+                                "consulte the global ranking from",
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_1___default()), {
+                                    href: "/",
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                        className: "text-blue-500 hover:cursor-pointer",
+                                        children: " here"
+                                    })
+                                })
+                            ]
                         })
                     ]
                 })
-            ]
-        })
+            })
+        ]
     });
 };
 const getServerSideProps = async ({ query  })=>{
@@ -276,6 +288,13 @@ module.exports = require("next/dist/shared/lib/router/utils/route-regex.js");
 /***/ ((module) => {
 
 module.exports = require("next/dist/shared/lib/utils.js");
+
+/***/ }),
+
+/***/ 968:
+/***/ ((module) => {
+
+module.exports = require("next/head");
 
 /***/ }),
 

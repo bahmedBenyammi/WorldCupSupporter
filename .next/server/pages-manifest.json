@@ -1,10 +1,10 @@
 {
   "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
   "/api/GlobalVoteSubmit": "pages/api/GlobalVoteSubmit.js",
   "/matches": "pages/matches.html",
-  "/_error": "pages/_error.js",
   "/": "pages/index.js",
-  "/confirme": "pages/confirme.js",
   "/_document": "pages/_document.js",
+  "/confirme": "pages/confirme.js",
   "/404": "pages/404.html"
 }
