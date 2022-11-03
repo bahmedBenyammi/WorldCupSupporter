@@ -41,7 +41,7 @@ export default function Navbar (){
                     <Image layout={"fill"} src={logo}  alt="logo" />
                 </div>
                 <div className=''>
-                    <p className='md:text-xl text-lg font-sans font-bold font-nav'>Football Supporter</p>
+                    <p className='md:text-xl text-lg font-sans font-bold font-nav'>Football Supporters</p>
                 </div>
             </div></Link>
             <button type="button" onClick={handleClick}

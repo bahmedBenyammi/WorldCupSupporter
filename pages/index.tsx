@@ -27,7 +27,7 @@ const Home: NextPage<Props> = ({rank}) => {
 
     return (<div className=''>
             <Head>
-                <title>Football supporter</title>
+                <title>Football supporters</title>
                 <meta name="description" content="support team in world cup 2022,guess who will win that world cup" key="desc" />
                 <meta property="og:title" content="World cup Qatar 2022" />
             </Head>
