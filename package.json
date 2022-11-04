@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "postbuild": "next-sitemap",
     "build": "next build",
     "start": "next start -p 8080",
     "lint": "next lint",
@@ -15,6 +16,7 @@
     "emailjs": "^4.0.1",
     "mongoose": "^6.6.5",
     "next": "12.3.1",
+    "next-sitemap": "^3.1.30",
     "react": "18.2.0",
     "react-country-region-selector": "^3.6.1",
     "react-dom": "18.2.0",
