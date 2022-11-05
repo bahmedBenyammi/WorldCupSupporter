@@ -255,8 +255,8 @@ export const teamList: Country[] = [{name: 'Qatar', short: 'QA'}, {name: 'German
 }, {name: 'Netherlands', short: 'NL'}, {name: 'Argentina', short: 'AR'}, {
     name: 'Iran',
     short: 'IR'
-}, {name: 'South_Korea', short: 'KR'}, {name: 'Japan', short: 'JP'}, {
-    name: 'Saudi_Arabia', short: 'SA'}, {name: 'Ecuador', short: 'EC'}, {name: 'Uruguay', short: 'UY'}, {name: 'Canada', short: 'CA'}, {
+}, {name: 'South Korea', short: 'KR'}, {name: 'Japan', short: 'JP'}, {
+    name: 'Saudi Arabia', short: 'SA'}, {name: 'Ecuador', short: 'EC'}, {name: 'Uruguay', short: 'UY'}, {name: 'Canada', short: 'CA'}, {
     name: 'Ghana',
     short: 'GH'
 }, {name: 'Senegal', short: 'SN'}, {name: 'Portugal', short: 'PT'}, {name: 'Poland', short: 'PL'}, {

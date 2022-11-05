@@ -8,10 +8,6 @@ const nextConfig = {
 
     unoptimized: true
   },
-  webpack(config) {
-    config.infrastructureLogging = { debug: /PackFileCache/ }
-    return config;
-  }
 
 }
 
