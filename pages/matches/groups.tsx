@@ -9,7 +9,7 @@ import Navbar from "../../components/Navbar";
      groups:Group[]
  }
 const Groups: NextPage<props> = ({groups}) => {
-    return (<div>
+    return (<div >
         <Navbar border={false} sticky={false} />
         <NavMathes/>
         <div className=" ">
@@ -20,6 +20,7 @@ const Groups: NextPage<props> = ({groups}) => {
 }
 
 const GroupComponent:FC<{group:Group}>=({group})=>{
+
     return(
         <div className="w-full md:px-10 p-2 flex justify-center  bg-gray-100/20 w-full">
            <div className="bg-white border rounded p-4 shadow w-full">
@@ -95,12 +96,12 @@ const GroupComponent:FC<{group:Group}>=({group})=>{
 }
 export async function getStaticProps() {
     const res = await teamsStatus()
-
+    console.log("ok")
     return {
         props: {
             groups:JSON.parse( JSON.stringify(res)),
         },
-        revalidate: 60*30, // In seconds
+        revalidate: 10, // In seconds
     }
 }
 

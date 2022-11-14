@@ -1,4 +1,5 @@
 import {ITeam, Team} from "../model/Team";
+import db from "../model/Bd";
 
 export interface Group{
     group:string,
@@ -6,6 +7,7 @@ export interface Group{
 
 }
 export const teamsStatus=async ():Promise<Group[]> => {
+    await db.getInestence()
     var i = 0
     var teams:Group[] = []
     while (i < 8) {
@@ -20,6 +22,7 @@ export const teamsStatus=async ():Promise<Group[]> => {
 
         teams.push({group: c, teams:  t })
         i++;
+
     }
     return teams
 }

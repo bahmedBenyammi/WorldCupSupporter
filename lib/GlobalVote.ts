@@ -23,6 +23,7 @@ export const GlobalVoteCulc = async (): Promise<Rank[]> => {
 
 }
 export const confirmeGlobal=async (email: string, id: string):Promise<string> => {
+    await db.getInestence()
     let vote = await GlobalVote.findOne({email: email})
     if (vote === null)
         return "not found"
