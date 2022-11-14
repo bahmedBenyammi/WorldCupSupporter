@@ -4,6 +4,7 @@
 
 html,
 body {
+  position: relative;
   scrollbar-width: none;
   padding: 0;
   margin: 0;
@@ -19,6 +20,9 @@ body {
 
 .fill-page{
   height:calc(100vh - 4rem);
+}
+.fill-pageWait{
+  height:calc(100vh - 14.4rem);
 }
 .font-nav{
   font-family: Verdana, cursive;
@@ -42,7 +46,7 @@ a {
 
 @keyframes GradientBackground {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 25% 50%;

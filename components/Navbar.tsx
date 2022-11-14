@@ -4,10 +4,13 @@ import logo from "../images/logo.svg"
 import Image from "next/image";
 import {MouseEvent, useState} from "react";
 import {useRouter} from "next/router";
-
+interface props{
+    sticky:boolean,
+    border:boolean
+}
 const linkStyle=" font-text font-black w-auto p-4 flex  " +
     "justify-center items-center  hover:text-blue-500 hover:bg-gray-200" +
-    "md:border-none border-b border-b-gray-200  "
+    "md:border-none"
 
 const active='text-blue-500'
 const links=[{
@@ -18,12 +21,17 @@ const links=[{
     link:"/matches"
 }
 ]
-export default function Navbar (){
+export default function Navbar ({sticky,border}: props){
     const [show ,setShow]=useState(false)
     const diplay = (show) ? "" : "hidden" ;
     const focus = (show) ?  "hover:bg-gray-100 focus:outline-none  focus:ring-gray-200" :""
+    const Sticky = (sticky) ?  "sticky" :""
+    const Border = (border) ?  "border-b border-b-gray-200" :""
     const router = useRouter();
     const isActive=(link:string)=> {
+        if (link.length<router.pathname.length)
+            if (router.pathname.startsWith(link+"/"))
+                return linkStyle +" "+active
         if ( link===router.pathname)
         return linkStyle +" "+active
         return linkStyle}
@@ -31,9 +39,9 @@ export default function Navbar (){
       setShow(!show)
     }
     return(
-        <nav className="flex items-center justify-between  bg-white
-        md:shadow-sm z-10  sticky block top-0 m-0 p-0 border-b border-b-gray-200">
-            <div className="h-16 container flex flex-wrap justify-between items-center mx-auto">
+        <nav className={"flex items-center justify-between  bg-white " +
+            "md:shadow-sm z-10  block top-0 m-0 p-0 "+Sticky+" "+ Border}>
+            <div className="h-16 w-full px-2 flex flex-wrap justify-between items-center">
                 <Link href={"/"} >
             <div className="flex items-center h-full cursor-pointer ">
 
@@ -56,7 +64,7 @@ export default function Navbar (){
     />
                 </svg>
             </button>
-            <div className={'md:h-full md:mr-4 md:bg-none md:border-none border-b border-b-gray-200 ' +
+            <div className={'md:h-full  md:bg-none md:border-none border-b border-b-gray-200  ' +
                 'bg-white md:block md:w-auto w-full '+ diplay} id="navbar-default">
                 <div className="flex flex-col  ms:border-b-gray-200 md:p-0 md:m-0  shadow
                  w-full md:flex-row md:h-full md:shadow-none md:space-x-2 md:mt-0 md:text-sm

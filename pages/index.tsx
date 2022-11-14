@@ -10,6 +10,7 @@ import {VoteModle} from "../components/VoteModle";
 import {GlobelVoteForm} from "../components/FormVote";
 import {GlobalVoteCulc} from "../lib/GlobalVote";
 import Flag from "react-flagkit";
+import Navbar from "../components/Navbar";
 
 interface Props{
     rank:Rank[]
@@ -26,6 +27,7 @@ const Home: NextPage<Props> = ({rank}) => {
     }
 
     return (<div className=''>
+            <Navbar border={true} sticky={true} />
             <Head>
                 <title>Football supporters</title>
                 <meta name="description" content="support team in world cup 2022,guess who will win that world cup" key="desc" />
