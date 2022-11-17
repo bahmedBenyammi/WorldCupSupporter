@@ -5,11 +5,17 @@ import {Short} from "../../components/Country";
 import {teamsStatus,Group} from "../../lib/TeamsStatus";
 import {FC} from "react";
 import Navbar from "../../components/Navbar";
+import Head from "next/head";
  interface props{
      groups:Group[]
  }
 const Groups: NextPage<props> = ({groups}) => {
     return (<div >
+        <Head>
+            <title>World cup 2022 groups</title>
+            <meta name="description" content="groups of world cup 2022,first round,all teams piont in world cup 2022" key="desc" />
+            <meta property="og:title" content="World cup 2022 groups" />
+        </Head>
         <Navbar border={false} sticky={false} />
         <NavMathes/>
         <div className=" ">
@@ -71,7 +77,7 @@ const GroupComponent:FC<{group:Group}>=({group})=>{
                         hover:odd:bg-gray-100 hover:bg-gray-50 border-t border-t-gray-100" key={e.name}>
                             <td className="p-2">
                                 <div className="flex space-x-2 items-center">
-                                    <Flag country={Short[e.name]} ></Flag>
+                                    <Flag country={Short[e.name.replace("_","")]} ></Flag>
                                     <span>{e.name}</span>
                                 </div>
                             </td>

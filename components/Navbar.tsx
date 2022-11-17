@@ -17,8 +17,8 @@ const links=[{
     text:"Support your team",
     link:"/"
 },{
-    text:"Matches",
-    link:"/matches"
+    text:"Match",
+    link:"/match"
 }
 ]
 export default function Navbar ({sticky,border}: props){
