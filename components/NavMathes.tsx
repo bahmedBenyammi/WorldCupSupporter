@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import {MouseEvent, useState} from "react";
+import {useState} from "react";
 import {useRouter} from "next/router";
 
 
@@ -10,11 +10,11 @@ const linkStyle=" font-text font-black w-auto p-3 flex  " +
 
 const active='text-blue-500 border-b border-b-blue-500'
 const links=[{
-    text:"Match",
-    link:"/match"
+    text:"Matches",
+    link:"/matches"
 },{
     text:"Groups",
-    link:"/match/groups"
+    link:"/matches/groups"
 }
 ]
 export default function NavMathes (){

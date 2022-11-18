@@ -156,7 +156,7 @@ const Matches: NextPage = () => {
         <div>
             <Head>
                 <title>World cup 2022 match</title>
-                <meta name="description" content="Match schedule of world cup 2022,first round" key="desc" />
+                <meta name="description" content="Match schedule of world cup 2022,first round,soccer matches" key="desc" />
                 <meta property="og:title" content="Match schedule World cup Qatar 2022" />
             </Head>
             <Navbar border={false} sticky={false}/>
