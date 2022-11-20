@@ -8,6 +8,7 @@ import {IMatche} from "../../model/Matche";
 import {Short} from "../../components/Country";
 import Head from "next/head";
 import {getTime} from "../../lib/TimeLib";
+import Link from "next/link";
 
 
 interface DayMatche {
@@ -129,6 +130,14 @@ const Matches: NextPage = () => {
                                     <div className="flex items-center space-x-2 col-span-2 justify-end">
                                         <p>{m.team2}</p>
                                         <Flag country={Short[m.team2.replace("_", "")]}></Flag></div>
+                                </div>
+                                <div className='flex justify-center items-center mt-4'>
+                                    <Link href={"/matches/groupstage/"+m.team1+'vs'+m.team2}>
+                                         <button type='button'
+                                          className="p-2 px-4 border rounded border-gray-400 border-2 hover:border-white
+                                           hover:bg-blue-400 hover:text-white"
+                                         >View more</button>
+                                    </Link>
                                 </div>
                             </div>
                         })}
