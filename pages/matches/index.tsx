@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {IMatche} from "../../model/Matche";
 import {Short} from "../../components/Country";
 import Head from "next/head";
+import {getTime} from "../../lib/TimeLib";
 
 
 interface DayMatche {
@@ -28,21 +29,7 @@ const Matches: NextPage = () => {
         })
 
     }, [])
-    const getTime = (date: Date) => {
-        let m = date.getMinutes()
-        let ms
-        if (m < 10)
-            ms = '0' + m
-        else
-            ms = "" + m
-        let h = date.getHours()
-        let hs
-        if (h < 10)
-            hs = "0" + h
-        else
-            hs = "" + h
-        return hs + ":" + ms
-    }
+
     const wait = () => {
         return <div className="fill-pageWait">
             <div className=" bg-gray-100 p-2 h-full w-full md:px-12 space-y-4">
@@ -156,8 +143,8 @@ const Matches: NextPage = () => {
         <div>
             <Head>
                 <title>World cup 2022 match</title>
-                <meta name="description" content="Match schedule of world cup 2022,first round,soccer matches" key="desc" />
-                <meta property="og:title" content="Match schedule World cup Qatar 2022" />
+                <meta name="description" content="Title schedule of world cup 2022,first round,soccer matches" key="desc" />
+                <meta property="og:title" content="Title schedule World cup Qatar 2022" />
             </Head>
             <Navbar border={false} sticky={false}/>
             <NavMathes/>
