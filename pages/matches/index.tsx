@@ -122,14 +122,14 @@ const Matches: NextPage = () => {
                                 <div
                                     className="flex items-center p-2 grid grid-cols-5 justify-between w-full justify-self-center">
                                     <div className="flex items-center space-x-2 col-span-2">
-                                        <Flag country={Short[m.team1.replace("_", "")]}></Flag>
+                                        <Flag country={Short[m.team2.replace(" ", "_")]}></Flag>
                                         <p>{m.team1}</p>
                                     </div>
 
                                     <p className='col-span-1 text-center'>Vs</p>
                                     <div className="flex items-center space-x-2 col-span-2 justify-end">
                                         <p>{m.team2}</p>
-                                        <Flag country={Short[m.team2.replace("_", "")]}></Flag></div>
+                                        <Flag country={Short[m.team2.replace(" ", "_")]}></Flag></div>
                                 </div>
                                 <div className='flex justify-center items-center mt-4'>
                                     <Link href={"/matches/groupstage/"+m.team1+'vs'+m.team2}>
