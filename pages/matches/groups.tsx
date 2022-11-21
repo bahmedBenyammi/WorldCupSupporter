@@ -54,9 +54,7 @@ const GroupComponent:FC<{group:Group}>=({group})=>{
                         <th scope="col">
                             <div><span >L</span></div>
                         </th>
-                        <th scope="col" className="text-center">
-                            <div  className="flex justify-center"><span >Pt</span></div>
-                        </th>
+                      
                         <th scope="col" className="text-center">
                             <div><span >GF</span>
                             </div>
@@ -68,6 +66,9 @@ const GroupComponent:FC<{group:Group}>=({group})=>{
                         <th scope="col" className="text-center">
                             <div ><span >GD</span>
                             </div>
+                        </th>
+                       <th scope="col" className="text-center">
+                            <div  className="flex justify-center"><span >PTS</span></div>
                         </th>
                     </tr></thead>
                     <tbody>
