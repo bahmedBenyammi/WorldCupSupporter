@@ -122,7 +122,7 @@ const Matches: NextPage = () => {
                                 <div
                                     className="flex items-center p-2 grid grid-cols-5 justify-between w-full justify-self-center">
                                     <div className="flex items-center space-x-2 col-span-2">
-                                        <Flag country={Short[m.team2.replace(" ", "_")]}></Flag>
+                                        <Flag country={Short[m.team1.replace(" ", "_")]}></Flag>
                                         <p>{m.team1}</p>
                                     </div>
 
