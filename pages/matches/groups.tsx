@@ -89,8 +89,8 @@ const GroupComponent:FC<{group:Group}>=({group})=>{
                             <td className="text-center">{e.lost}</td>
                             <td className="text-center">{e.goals}</td>
                             <td className="text-center">{e.goalA}</td>
-                            <td className="text-center">{e.goalD}</td>
-                            <td className="text-center">{e.point}</td>
+                            <td className="text-center">{e.goals-e.goalA}</td>
+                            <td className="text-center">{e.win*3+e.drow}</td>
 
                         </tr>)
                     })}
