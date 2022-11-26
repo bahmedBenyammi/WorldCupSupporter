@@ -30,7 +30,8 @@ const Home: NextPage<Props> = ({rank}) => {
             <Navbar border={true} sticky={true} />
             <Head>
                 <title>Football supporters</title>
-                <meta name="description" content="support team in world cup 2022,guess who will win that world cup" key="desc" />
+                <meta name="description" content="footballsupportes.live is platform t support football team online
+                support team in world cup 2022,guess who will win that world cup" key="desc" />
                 <meta property="og:title" content="World cup Qatar 2022" />
             </Head>
             <div className=' h-[25rem] bg-[url("../images/support.jpg")] bg-cover bg-center'>

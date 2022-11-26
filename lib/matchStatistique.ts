@@ -1,6 +1,7 @@
 import {IMatche, Matche, VoteMatch} from "../model/Matche";
 import {ITeam, Team} from "../model/Team";
 import db from "../model/Bd";
+import {setMatchTime} from "./GetMatches";
 
 export interface IStatistique{
     match:IMatche,
@@ -16,7 +17,8 @@ export const matchStatistique=async (title:string,round:string):Promise<IStatist
      let teams:string[]=title.split('vs')
     const team1=Team.findOne({name:teams[0]})
     const team2=Team.findOne({name:teams[1]})
-    const match=await Matche.findOne({team1:teams[0],team2:teams[1],round:round})
+    let match=await Matche.findOne({team1:teams[0],team2:teams[1],round:round})
+    match=setMatchTime(match._doc)
     let w1=VoteMatch.count({isComfire: true, support: 1 ,'match._id':match!._id})
     let w2=VoteMatch.count({isComfire: true, support: 2,'match._id':match!._id})
     let d=round==='First-Round'? await VoteMatch.count({isComfire: true, support: 0}):0

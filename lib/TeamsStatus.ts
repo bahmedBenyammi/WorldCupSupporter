@@ -15,8 +15,15 @@ export const teamsStatus=async ():Promise<Group[]> => {
 
         let t :ITeam[] = await Team.find({group: c})
         t.sort((a,b)=>{
+            b.point=b.win*3 +b.drow
+            a.point=a.win*3 +a.drow
             if( b.point === a.point)
+            {    b.goalD=b.goals-b.goalA
+                 a.goalD=a.goals-a.goalA
+                if( b.goalD === a.goalD)
                 return b.name>a.name? -1:1
+             return b.goalD-a.goalD
+            }
             return b.point-a.point
         })
 

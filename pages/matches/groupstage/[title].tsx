@@ -7,9 +7,12 @@ import {Short} from "../../../components/Country";
 import {useEffect, useRef, useState} from "react";
 import {getTime} from "../../../lib/TimeLib";
 import Head from "next/head";
+import {IMatche} from "../../../model/Matche";
+import {IoIosTimer} from "react-icons/io";
 
 const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
     const dateRef=useRef<HTMLParagraphElement>(null)
+    const [m,setMatch]=useState(match)
     const [client,setClient]=useState(false)
     const [date,setDate]=useState<Date>()
     useEffect(()=>{
@@ -20,6 +23,32 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
             setClient(true)
         }}
     },[dateRef])
+
+
+    useEffect(()=>{
+        if (match.isplay&&!match.isfinsh)
+            setTimeout(()=>{
+                fetch("/api/matchupdate?id="+match._id!.toString()).then(res=>{return res.json()}).then(data=>{
+                    console.log(data)
+                    setMatch(data.match)})
+            },1000*60 )
+    },[match])
+    const score=(m:IMatche)=>{
+        if(m.isfinsh||m.isplay)
+            return <div className='flex justify-center items-center'>
+                <p className='col-span-1 text-center text-4xl '>{m.score.team1+" - "+m.score.team2}</p></div>
+        else  return  <p className='col-span-1 text-center text-4xl'>Vs</p>
+    }
+    const time=(m:IMatche)=>{
+        if(m.isfinsh)
+            return  <p className='col-span-1 text-center p-2'>Full-Time</p>
+        else if (m.isplay)
+            return <div className="flex justify-center items-center space-x-1 p-2 animate-pulse">
+                <p className='col-span-1 text-center text-sm font-bold text-green-500 '>{m.time}</p>
+                <IoIosTimer className="text-green-500 h-4 w-4 "/></div>
+        else if (client) return  <><p className="text-xl font-bold">{date?.toDateString()}</p>
+            <p className="text-xl font-bold text-blue-500">{getTime(date!)}</p></>
+    }
     return <div>
         <Head>
             <title>{team1.name +' vs '+team2.name}</title>
@@ -30,16 +59,15 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
         <div className="w-full bg-gray-300 md:px-20">
             <div className="bg-white shadow p-2 py-10">
                 <div className="w-full p-4 flex flex-col items-center space-y-4">
-                    <p className="hidden" ref={dateRef}>{match.date.toString()}</p>
-                    {client && <><p className="text-xl font-bold">{date?.toDateString()}</p>
-                    <p className="text-xl font-bold text-blue-500">{getTime(date!)}</p></>}
+                    <p className="hidden" ref={dateRef}>{m.date.toString()}</p>
+                    {time(m)}
                 </div>
                 <div className="w-full grid grid-cols-5 items-center ">
                     <div className="flex flex-col items-center col-span-2 ">
                         <Flag className="h-16 w-16 md:h-20 md:w-20" country={Short[team1.name.replace("_", "")]}></Flag>
                         <p>{team1.name}</p>
                     </div>
-                    <p className="text-center text-xl font-bold">vs</p>
+                    {score(m)}
                     <div className="flex flex-col items-center  col-span-2">
                         <Flag className="h-16 w-16 md:h-20 md:w-20 " country={Short[team2.name.replace("_", "")]}></Flag>
                         <p>{team2.name}</p>
@@ -56,9 +84,9 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
                         <p className="text-center col-span-2">{team2.group}</p>
                     </div>
                     <div className="w-full grid grid-cols-5 items-center ">
-                        <p className="text-center col-span-2">{team1.point}</p>
+                        <p className="text-center col-span-2">{ team1.win * 3 + team1.drow}</p>
                         <p className="text-center  font-bold">Points</p>
-                        <p className="text-center col-span-2">{team2.point}</p>
+                        <p className="text-center col-span-2">{ team2.win * 3 + team2.drow}</p>
                     </div>
                     <div className="w-full grid grid-cols-5 items-center ">
                         <p className="text-center col-span-2">{team1.mathesPlay}</p>
@@ -91,9 +119,9 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
                         <p className="text-center col-span-2">{team2.goalA}</p>
                     </div>
                     <div className="w-full grid grid-cols-5 items-center ">
-                        <p className="text-center col-span-2">{team1.goalD}</p>
+                        <p className="text-center col-span-2">{team1.goals-team1.goalA}</p>
                         <p className="text-center  font-bold">Goals different</p>
-                        <p className="text-center col-span-2">{team2.goalD}</p>
+                        <p className="text-center col-span-2">{team2.goals-team2.goalA}</p>
                     </div>
                 </div>
             </div>
@@ -119,6 +147,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
             w1:s.w1,
             w2:s.w2,
             d:s.d},
+        revalidate:1000*60
     }
 }
 
