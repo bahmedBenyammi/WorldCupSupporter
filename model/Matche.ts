@@ -82,11 +82,11 @@ const matcheshema=new Schema({
     timeAdd:{
         part1:{
             type:Number,
-            default:0
+            default:2
         },
         part2:{
             type:Number,
-            default:0
+            default:2
         }
     },
 

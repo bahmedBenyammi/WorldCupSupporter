@@ -40,7 +40,7 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
         if (match.isplay&&!match.isfinsh&&updateT)
             setTimeout(()=>{ update()      },1000*60 )
 
-    },[match])
+    },[m])
     const score=(m:IMatche)=>{
         if(m.isfinsh||m.isplay)
             return <div className='flex justify-center items-center'>
@@ -64,9 +64,9 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
             <meta property="og:title" content={team1.name +' vs '+team2.name+' group stage Qatar 2022'} />
         </Head>
         <Navbar sticky={true} border={true}/>
-        <div className="w-full bg-gray-300 md:px-20">
-            <div className="bg-white shadow p-2 py-10">
-                <div className="w-full p-4 flex flex-col items-center space-y-4">
+        <div className="w-full bg-gray-300 md:px-20 fill-page">
+            <div className="bg-white shadow p-2 h-full">
+                <div className="w-full p-4 py-2 flex flex-col items-center space-y-4">
                     <p className="hidden" ref={dateRef}>{m.date.toString()}</p>
                     {time(m)}
                 </div>
