@@ -40,7 +40,7 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
         if (match.isplay&&!match.isfinsh&&updateT)
             setTimeout(()=>{ update()      },1000*60 )
 
-    },[match])
+    },[m])
     const score=(m:IMatche)=>{
         if(m.isfinsh||m.isplay)
             return <div className='flex justify-center items-center'>
