@@ -14,6 +14,7 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
     const dateRef=useRef<HTMLParagraphElement>(null)
     const [m,setMatch]=useState(match)
     const [client,setClient]=useState(false)
+    const [updateT,setUpdateT]=useState(false)
     const [date,setDate]=useState<Date>()
     useEffect(()=>{
         if(window!=undefined)
@@ -21,17 +22,24 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
             if (dateRef!=null)
             { setDate(new Date(dateRef!.current!.textContent!.toString()))
             setClient(true)
+                if (match.isplay&&!match.isfinsh)
+                update()
         }}
     },[dateRef])
 
+    const update=()=>{
 
+            fetch("/api/matchupdate?id="+match._id!.toString()).then(res=>{return res.json()}).then(data=>{
+                console.log(data)
+                setMatch(data.match)
+                setUpdateT(true)
+            })
+
+    }
     useEffect(()=>{
-        if (match.isplay&&!match.isfinsh)
-            setTimeout(()=>{
-                fetch("/api/matchupdate?id="+match._id!.toString()).then(res=>{return res.json()}).then(data=>{
-                    console.log(data)
-                    setMatch(data.match)})
-            },1000*60 )
+        if (match.isplay&&!match.isfinsh&&updateT)
+            setTimeout(()=>{ update()      },1000*60 )
+
     },[match])
     const score=(m:IMatche)=>{
         if(m.isfinsh||m.isplay)
