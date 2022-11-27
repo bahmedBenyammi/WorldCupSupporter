@@ -22,7 +22,7 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
             if (dateRef!=null)
             { setDate(new Date(dateRef!.current!.textContent!.toString()))
             setClient(true)
-                if (match.isplay&&!match.isfinsh)
+
                 update()
         }}
     },[dateRef])
@@ -30,7 +30,7 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
     const update=()=>{
 
             fetch("/api/matchupdate?id="+match._id!.toString()).then(res=>{return res.json()}).then(data=>{
-                console.log(data)
+
                 setMatch(data.match)
                 setUpdateT(true)
             })
@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
             w1:s.w1,
             w2:s.w2,
             d:s.d},
-        revalidate:1000*60
+        revalidate:1000*60*10
     }
 }
 
