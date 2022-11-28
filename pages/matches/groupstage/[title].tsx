@@ -37,7 +37,7 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
 
     }
     useEffect(()=>{
-        if (match.isplay&&!match.isfinsh&&updateT)
+        if (m.isplay&&!m.isfinsh&&updateT)
             setTimeout(()=>{ update()      },1000*60 )
 
     },[m])
