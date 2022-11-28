@@ -72,12 +72,12 @@ const Title: NextPage<IStatistique> = ({team1,team2,match}) => {
                 </div>
                 <div className="w-full grid grid-cols-5 items-center ">
                     <div className="flex flex-col items-center col-span-2 ">
-                        <Flag className="h-16 w-16 md:h-20 md:w-20" country={Short[team1.name.replace("_", "")]}></Flag>
+                        <Flag className="h-16 w-16 md:h-20 md:w-20" country={Short[team1.name.replace(" ", "_")]}></Flag>
                         <p>{team1.name}</p>
                     </div>
                     {score(m)}
                     <div className="flex flex-col items-center  col-span-2">
-                        <Flag className="h-16 w-16 md:h-20 md:w-20 " country={Short[team2.name.replace("_", "")]}></Flag>
+                        <Flag className="h-16 w-16 md:h-20 md:w-20 " country={Short[team2.name.replace(" ", "_")]}></Flag>
                         <p>{team2.name}</p>
                     </div>
                 </div>
