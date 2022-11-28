@@ -56,6 +56,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
             if (dt>45)
             {
                 let ta=dt-45
+                 dt=dt-ta
                 m.time=''+dt+'+'+ta
             }else m.time=''+dt
         }
@@ -68,6 +69,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
             if (t>90)
             {
                 let ta=dt-105-m.timeAdd.part1
+                  t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
         }
