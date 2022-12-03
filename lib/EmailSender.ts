@@ -1,4 +1,5 @@
 import { SMTPClient } from 'emailjs';
+import {text} from "stream/consumers";
 
 const client = new SMTPClient({
     user: process.env.EMAIL_USERNAME,
@@ -7,14 +8,15 @@ const client = new SMTPClient({
     ssl: true,
 });
 
-export const emailConfermation=(email:string,link:string,support:string)=>{
+export const emailConfermation=(email:string,link:string,support:string,
+                                text:string,type:string)=>{
    client.send({
        text: 'i hope this works',
        from:"Football Supputers",
        to:email,
        subject:"confirm your vote",
        attachment: [
-           { data: templet(support,link), alternative: true },
+           { data: templet(support,link,text,type), alternative: true },
        ],
    },(err) => {
        console.log(err);
@@ -23,7 +25,7 @@ export const emailConfermation=(email:string,link:string,support:string)=>{
 }
 
 
-const templet=(suppot:string,link:string):string=>{return ('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"\n' +
+const templet=(suppot:string,link:string,text:string,type:string):string=>{return ('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"\n' +
     '        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\n' +
     '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office"\n' +
     '      xmlns:v="urn:schemas-microsoft-com:vml" lang="en">\n' +
@@ -114,10 +116,11 @@ const templet=(suppot:string,link:string):string=>{return ('<!DOCTYPE html PUBLI
     '    <div class="div">\n' +
 
     '        <h2 align="center"> Welcome to Football supporter </h2>\n' +
-    '        <p align="center">\n' +
-    '            you support in world cup 2022\n' +
+    '        <p align="center">\n' + type+
     '        </p>\n' +
     '        <h3 align="center">'+suppot+'</h3>\n' +
+               '<p align="center">\n' + text+
+    '        </p>\n' +
     '        <p align="center">\n' +
     '            please Confirme your vote from hier\n' +
     '        </p>\n' +

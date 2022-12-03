@@ -28,7 +28,7 @@ export default async function handler(
       const salt = await bcrypt.genSalt(10)
       let id=await bcrypt.hash(vote._id.toString(),salt)
       let link=process.env.URL+"/confirme?email="+email+"&id="+id
-      emailConfermation(email,link,support)
+      emailConfermation(email,link,support,"in World cup 2022","you support")
       return res.status(200).json({message: 'success'})
   }catch (e) {
         console.log("ok")

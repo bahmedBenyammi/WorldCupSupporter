@@ -1,9 +1,10 @@
 import React, {ChangeEvent, FC, FormEvent, useState} from "react";
 import {checkDomain} from "./domaisList";
 import {CountrySelector} from "./Selectores";
-import {countryList, teamList} from "./Country";
+import {countryList, Short, teamList} from "./Country";
 import {VoteProps} from "./voteProps";
 import {IMatche} from "../model/Matche";
+import Flag from "react-flagkit";
 let State = {
     email: "",
     country: "",
@@ -102,7 +103,12 @@ interface MatchVoteFormProps extends VoteProps{
     match:IMatche
 }
 export const MatchVoteForm: FC<MatchVoteFormProps> = ({changeStatus,match}) => {
-    const [from, setFrom] = useState(State);
+    const [from, setFrom] = useState({
+        email: "",
+        country: "",
+        support: 0,
+        idMatch:match._id!.toString()
+    });
     const [mesErro,setMesErro]=useState('')
     const handlerChage = (e: ChangeEvent<HTMLInputElement>) => {
         setFrom({...from, [e.target.name]: e.target.value})
@@ -112,10 +118,11 @@ export const MatchVoteForm: FC<MatchVoteFormProps> = ({changeStatus,match}) => {
         setFrom({...from, [name]: value})
         console.log(from)
     }
+   const handleChangeSupport=(s:number)=>{setFrom({...from, support:s})}
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(from.country===undefined||from.country===''){setMesErro('please select your country') ;return}
-        if(from.support===undefined||from.support===''){setMesErro('please select which team you support') ;return}
+        if(from.support===undefined||from.support===0){setMesErro('please choice one Team') ;return}
         if (!checkDomain(from.email))
         { console.log('errore')
             setMesErro('we not accept this domain')
@@ -124,7 +131,7 @@ export const MatchVoteForm: FC<MatchVoteFormProps> = ({changeStatus,match}) => {
         if(!changeStatus)
             return;
         changeStatus('wait')
-        fetch('/api/GlobalVoteSubmit', {
+        fetch('/api/matchVoteSubmit', {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -142,16 +149,12 @@ export const MatchVoteForm: FC<MatchVoteFormProps> = ({changeStatus,match}) => {
                 changeStatus('exist')
             else
                 changeStatus('error')
-
-
         })
             .catch(e => {
                 console.log(e)
             })
-
-
     }
-
+    const isactive=(s:number)=>{return s==from.support? "bg-green-500 hover:bg-green-500border-gray-400 ":"hover:bg-gray-100 border-gray-400"}
     return (<div className="w-full p-2 scroll-mr-0">
         <p className="text-center font-sans font-black text-[30px] p-2">Support your team</p>
         <p className="text-center font-sans p-2 ">support your team in world cup 2022 <br/>
@@ -171,10 +174,23 @@ export const MatchVoteForm: FC<MatchVoteFormProps> = ({changeStatus,match}) => {
                        onChange={handlerChage} required
                        value={from.email} type="email"/>
             </div>
-            <div className="grid grid-cols-4 items-center w-full justify-center space-x-4">
-
+            <div className="flex p-4 items-center w-full justify-center space-x-4">
+                <button onClick={()=>{handleChangeSupport(1)}} type="button"
+                    className={'border  rounded font-normal flex justify-center items-center space-x-2 ' +
+                        'p-2 px-8 justify-self-center '+isactive(1)}>
+                    <Flag country={Short[match.team1.replace(" ", "_")]}>
+                    </Flag>
+                    <p>{match.team1}</p>
+                </button>
+                <button onClick={()=>{handleChangeSupport(2)}} type="button"
+                    className={'border  rounded font-normal flex justify-center items-center space-x-2 ' +
+                        'p-2 px-8 justify-self-center '+isactive(2)}>
+                    <Flag country={Short[match.team2.replace(" ", "_")]}>
+                    </Flag>
+                    <p>{match.team2}</p>
+                </button>
             </div>
-            <div className='flex justify-center pt-4'>
+            <div className='flex justify-center'>
                 <button
                     className='bg-black text-white font-normal p-2 px-10 hover:bg-gray-900 justify-self-center'>Vote
                 </button>

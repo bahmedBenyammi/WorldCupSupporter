@@ -22,7 +22,7 @@ export const teamsStatus=async ():Promise<Group[]> => {
                  a.goalD=a.goals-a.goalA
                 if( b.goalD === a.goalD)
                 return b.name>a.name? -1:1
-             return b.goalD-a.goalD
+             return b.goalD>a.goalD?1:-1
             }
             return b.point-a.point
         })

@@ -104,7 +104,7 @@ const error = () => {
                     </div>
                 </div>
                 <div className='text-center '>
-                    <p className='text-2xl font-bold'>Error 504 !</p>
+                    <p className='text-2xl font-bold'>Error 500 !</p>
 
                 </div>
 

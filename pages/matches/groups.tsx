@@ -78,7 +78,7 @@ const GroupComponent:FC<{group:Group}>=({group})=>{
                         hover:odd:bg-gray-100 hover:bg-gray-50 border-t border-t-gray-100" key={e.name}>
                             <td className="p-2">
                                 <div className="flex space-x-2 items-center">
-                                    <Flag country={Short[e.name.replace("_","")]} ></Flag>
+                                    <Flag country={Short[e.name.replace("_"," ")]} ></Flag>
                                     <span>{e.name}</span>
                                 </div>
                             </td>

@@ -30,10 +30,12 @@ interface PropsConfirme{
                <p className="text-3xl font-serif font-sans font-bold">Congratulation </p>
                    <p className='rotate-6 text-3xl font-bold'>!</p>
                </div>
-               <p className="text-xl font-bold">you support in world cup 2022</p>
+               <p className="text-xl font-bold">you support </p>
                <Flag className='h-40 w-40' country={Short[country.replace(" ","_")]} />
                {/*<Flag className='h-40 w-40' country={Short['DZ']} />*/}
                <p className="text-xl m-2 font-bold">{country}</p>
+               <p className="text-xl font-bold">world cup 2022</p>
+
                {/*<p className="text-xl m-2 font-bold">Algeria</p>*/}
                <div className='flex justify-center items-center space-x-4'>
                    <p>Share in :</p>
@@ -55,6 +57,7 @@ interface PropsConfirme{
            </div>
     </div></>)
 }
+
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
     let {email,id}=query
     let redirect={
@@ -65,7 +68,6 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
     if (!email||!id)
         return redirect
     let confirme=await confirmeGlobal(email as string, id as string)
-    console.log(confirme)
     if (confirme==='not found')
         return redirect
     return {

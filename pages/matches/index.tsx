@@ -3,13 +3,17 @@ import Navbar from "../../components/Navbar";
 import NavMathes from "../../components/NavMathes";
 import Flag from "react-flagkit";
 
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useMemo, useState} from "react";
 import {IMatche} from "../../model/Matche";
 import {Short} from "../../components/Country";
 import Head from "next/head";
 import {getTime} from "../../lib/TimeLib";
 import Link from "next/link";
 import {IoIosTimer} from "react-icons/io";
+import * as url from "url";
+import {VoteModle} from "../../components/VoteModle";
+import {MatchVoteForm} from "../../components/FormVote";
+import {IMatchVote} from "../../lib/voteCalcul";
 
 
 interface DayMatche {
@@ -19,7 +23,18 @@ interface DayMatche {
 
 const Matches: NextPage = () => {
     const [matches, setMatches] = useState<DayMatche[]>([])
+    const [showVote, setShowVote] = useState(false)
     const [display, setdisplay] = useState(false)
+    const [match, setMatch] = useState<IMatche | undefined>(undefined)
+    const showModle = (m: IMatche) => {
+        setMatch(m)
+        setShowVote(true)
+    }
+    const closeModel = () => {
+        setShowVote(false)
+    }
+
+
     useEffect(() => {
         fetch('/api/matchSchedule').then(res => {
             return res.json()
@@ -35,88 +50,94 @@ const Matches: NextPage = () => {
     const wait = () => {
         return <div className="fill-pageWait">
             <div className=" bg-gray-100 p-2 h-full w-full md:px-12 space-y-4">
-                <div className="w-full  grid animate-pulse md:grid-cols-2 bg-white shadow grid-cols-1 justify-center p-2 ">
-                        <div className=" m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
-                                <div className="flex col-span-2 space-x-4 items-center">
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-                                    <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
-                                </div>
+                <div
+                    className="w-full  grid animate-pulse md:grid-cols-2 bg-white shadow grid-cols-1 justify-center p-2 ">
+                    <div
+                        className=" m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
+                        <div className="flex col-span-2 space-x-4 items-center">
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
+                            <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
+                        </div>
 
-                                <p className='col-span-1 text-center'>Vs</p>
-                                <div className="flex items-center space-x-2 col-span-2 justify-end">
+                        <p className='col-span-1 text-center'>Vs</p>
+                        <div className="flex items-center space-x-2 col-span-2 justify-end">
 
-                                    <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
-                                </div>
-
+                            <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
 
                         </div>
-                        <div className=" m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
-                                <div className="flex col-span-2 space-x-4 items-center">
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-                                    <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
-                                </div>
-
-                                <p className='col-span-1 text-center'>Vs</p>
-                                <div className="flex items-center space-x-2 col-span-2 justify-end">
-
-                                    <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
-                                </div>
 
 
-                        </div>
                     </div>
-                <div className="w-full  grid animate-pulse md:grid-cols-2 bg-white shadow grid-cols-1 justify-center p-2 ">
-                        <div className="m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
-                                <div className="flex col-span-2 space-x-4 items-center">
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-                                    <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
-                                </div>
+                    <div
+                        className=" m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
+                        <div className="flex col-span-2 space-x-4 items-center">
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
+                            <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
+                        </div>
 
-                                <p className='col-span-1 text-center'>Vs</p>
-                                <div className="flex items-center space-x-2 col-span-2 justify-end">
+                        <p className='col-span-1 text-center'>Vs</p>
+                        <div className="flex items-center space-x-2 col-span-2 justify-end">
 
-                                    <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
-                                </div>
-
+                            <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
 
                         </div>
-                        <div className="m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
-                                <div className="flex col-span-2 space-x-4 items-center">
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-                                    <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
-                                </div>
-
-                                <p className='col-span-1 text-center'>Vs</p>
-                                <div className="flex items-center space-x-2 col-span-2 justify-end">
-
-                                    <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
-                                    <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
-                                </div>
 
 
-                        </div>
                     </div>
+                </div>
+                <div
+                    className="w-full  grid animate-pulse md:grid-cols-2 bg-white shadow grid-cols-1 justify-center p-2 ">
+                    <div
+                        className="m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
+                        <div className="flex col-span-2 space-x-4 items-center">
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
+                            <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
+                        </div>
+
+                        <p className='col-span-1 text-center'>Vs</p>
+                        <div className="flex items-center space-x-2 col-span-2 justify-end">
+
+                            <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
+
+                        </div>
+
+
+                    </div>
+                    <div
+                        className="m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
+                        <div className="flex col-span-2 space-x-4 items-center">
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
+                            <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
+                        </div>
+
+                        <p className='col-span-1 text-center'>Vs</p>
+                        <div className="flex items-center space-x-2 col-span-2 justify-end">
+
+                            <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
+                            <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
+
+                        </div>
+
+
+                    </div>
+                </div>
 
 
             </div>
         </div>
     }
     const Matches = () => {
-        return <div className=" bg-gray-100 md:p-2 px-1 py-2 md:px-12">
+        return <div className=" bg-gray-100 md:p-2 px-1 py-2 lg:px-12">
             {matches.map(e => {
                 return <div className="border mb-2 justify-items-center shadow bg-white flex flex-col  justify-center"
                             key={e.day}>
                     <p className="p-4 font-bold text-center">{e.day}</p>
                     <div className="w-full grid md:grid-cols-2  grid-cols-1 justify-center md:p-2  px-1 py-2">
                         {e.matches.map(m => {
-                            return <Match m={m}   key={m._id!.toString()}/>
+                            return <Match m={m} key={m._id!.toString()} showModle={showModle}/>
                         })}
                     </div>
                 </div>
@@ -129,48 +150,71 @@ const Matches: NextPage = () => {
         <div>
             <Head>
                 <title>World cup 2022 match</title>
-                <meta name="description" content="Title schedule of world cup 2022,first round,soccer matches" key="desc" />
-                <meta property="og:title" content="Title schedule World cup Qatar 2022" />
+                <meta charSet="UTF-8"/>
+
+                <meta name="description"
+                      content="Title schedule of world cup 2022 and today match ,watch live score and update  first round,soccer matches"
+                      key="desc"/>
+                <meta property="og:title" content="Title schedule World cup Qatar 2022"/>
             </Head>
             <Navbar border={false} sticky={false}/>
             <NavMathes/>
             {display ? Matches() : wait()}
-
+            {showVote && <VoteModle handleClose={closeModel}><MatchVoteForm match={match!}/></VoteModle>}
         </div>
     )
 }
-interface MatchProps{
-    m:IMatche
+
+interface MatchProps {
+    m: IMatche
+
+    showModle?(m: IMatche): void
 }
-const Match:FC<MatchProps>=({m})=>{
 
-    const [match,setMatch]=useState(m)
+const Match: FC<MatchProps> = ({m, showModle}) => {
 
-    useEffect(()=>{
-      if (match.isplay&&!match.isfinsh)
-          setTimeout(()=>{
-              fetch("/api/matchupdate?id="+match._id!.toString()).then(res=>{return res.json()}).then(data=>{
-                  console.log(data)
-                  setMatch(data.match)})
-          },1000*60 )
-    },[match])
-    const score=(m:IMatche)=>{
-        if(m.isfinsh||m.isplay)
-          return  <p className='col-span-1 text-center'>{m.score.team1+" - "+m.score.team2}</p>
-        else  return  <p className='col-span-1 text-center'>Vs</p>
+    const [match, setMatch] = useState(m)
+    const lint = () => {
+        let link
+        if (match.round === "First-Round")
+            link = "/matches/groupstage/"
+        else
+            link = "/matches/game-off/"
+        return link + match.team1 + 'vs' + match.team2
     }
-    const time=(m:IMatche)=>{
-        if(m.isfinsh)
-            return  <p className='col-span-1 text-center p-2'>Full-Time</p>
-            else if (m.isplay)
+    const guesses = useMemo(() => {
+        return <PeopleGuess m={match}/>
+    }, [])
+    useEffect(() => {
+        if (match.isplay && !match.isfinsh)
+            setTimeout(() => {
+                fetch("/api/matchupdate?id=" + match._id!.toString()).then(res => {
+                    return res.json()
+                }).then(data => {
+
+                    setMatch(data.match)
+                })
+            }, 1000 * 60)
+        console.log("repeat")
+    }, [match])
+    const score = (m: IMatche) => {
+        if (m.isfinsh || m.isplay)
+            return <p className='col-span-1 text-center'>{m.score.team1 + " - " + m.score.team2}</p>
+        else return <p className='col-span-1 text-center'>Vs</p>
+    }
+    const time = (m: IMatche) => {
+        if (m.isfinsh)
+            return <p className='col-span-1 text-center p-2'>Full-Time</p>
+        else if (m.isplay)
             return <div className="flex justify-center items-center space-x-1 p-2 animate-pulse">
                 <p className='col-span-1 text-center text-sm font-bold text-green-500 '>{m.time}</p>
                 <IoIosTimer className="text-green-500 h-4 w-4 "/></div>
-        else  return  <p className='col-span-1 text-center'>{getTime(m.date)}</p>
+        else return <p className='col-span-1 text-center'>{getTime(m.date)}</p>
     }
-    return(<div
+
+    return (<div
         className="md:p-4 p-1 py-2 md:m-2 mx-1 my-2 shadow flex-col border rounded hover:bg-gray-50 col-span-1"
-      >
+    >
         {time(match)}
         <div
             className="flex items-center p-2 grid grid-cols-5 justify-between w-full justify-self-center">
@@ -184,13 +228,21 @@ const Match:FC<MatchProps>=({m})=>{
                 <p>{match.team2}</p>
                 <Flag country={Short[match.team2.replace(" ", "_")]}></Flag></div>
         </div>
-        <div className='flex justify-center items-center mt-4'>
-            <Link href={"/matches/groupstage/"+match.team1+'vs'+match.team2}>
+        {match.round != "First-Round" && guesses}
+        <div className='flex justify-center items-center mt-4 flex-col lg:flex-row lg:space-x-2 space-y-2'>
+            <Link href={lint()}>
                 <button type='button'
-                        className="p-2 px-4 border rounded border-gray-400 border-2 hover:border-white
+                        className="p-2 px-4 border w-48 rounded border-gray-400 border-2 hover:border-white
                                            hover:bg-blue-400 hover:text-white"
-                >View more</button>
+                >View more
+                </button>
             </Link>
+            {match.round != "First-Round" && <button type='button' onClick={() => {
+                showModle!(m)
+            }} className="p-2 px-4 border  w-48 rounded border-gray-400 border-2 hover:border-white
+                                           hover:bg-blue-400 hover:text-white"
+            >Guess who will win
+            </button>}
         </div>
     </div>)
 }
@@ -218,5 +270,66 @@ const matcheDay = (matches: IMatche[]): DayMatche[] => {
     return matchesDay;
 }
 
+const PeopleGuess: FC<MatchProps> = ({m}) => {
+    const [status, setStaus] = useState("wait")
+    const [match, setMatch] = useState(m)
+    const [guess, setGuess] = useState<IMatchVote>()
+    useEffect(() => {
+        fetch("/api/matchGuess?id=" + match._id!.toString()).then(res => {
+            return res.json()
+        }).then(data => {
 
+            setGuess(data.guess)
+
+            setStaus("")
+        })
+    }, [])
+    const wait = () => {
+        return <div
+            className="w-full  grid animate-pulse  bg-gray-300 shadow  justify-center p-3 ">
+
+        </div>
+
+    }
+    const withClass=(w:number)=>{
+        console.log("w-["+w+"%]")
+        return "w-["+w+"%]".toString()
+    }
+    const guessCom = () => {
+        // @ts-ignore
+
+        // @ts-ignore
+        // console.log(guess!.w1===0&&guess!.w2===0)
+        // // @ts-ignore
+        // console.log(guess!.w1)
+        //  // @ts-ignore
+        if (guess!.w1===0&&guess!.w2===0)
+             return <div className="flex justify-center items-center w-full  lg:px-4 ">
+                 <p>no guesses yet</p>
+             </div>
+        else
+        return <div className="flex justify-center items-center w-full  lg:px-4 ">
+            <div className="w-1/12 justify-start flex"><Flag country={Short[match.team1.replace(" ", "_")]}></Flag>
+            </div>
+            <div className="w-5/6 flex justify-center items-center">
+                <div className={"bg-red-500 h-6  flex items-center text-sm text-white px-1 justify-start "+withClass(guess!.w1)}>
+                    {guess?.w1+"%"}
+                </div>
+
+                <div className={"bg-blue-500 h-6  flex items-center text-sm text-white px-1 justify-end "+withClass(guess!.w2) }>
+                    {guess?.w2+"%"}
+                </div>
+            </div>
+            <div className="w-1/12 justify-end flex"><Flag country={Short[match.team2.replace(" ", "_")]}>
+            </Flag></div>
+        </div>
+    }
+    return <div className="flex flex-col items-center ">
+        {/* eslint-disable-next-line react/no-unescaped-entities */}
+        <p className="p-4">People's guesses</p>
+        {status === "wait" ? wait() : guessCom()}
+
+    </div>
+
+}
 export default Matches

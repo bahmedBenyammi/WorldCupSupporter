@@ -26,8 +26,12 @@ export interface MatchParam {
 }
 export const getAllMatcheTitle=async (round:string):Promise<MatchParam[]> => {
     await db.getInestence()
+    let matches
+    if(round==="First-Round")
+        matches= await Matche.find({round:round});
+    else
+        matches= await Matche.find({round:{ $ne: "First-Round" }});
 
-    let matches= await Matche.find({round:round});
     var titles:MatchParam[]=[]
         matches.forEach(e=>{
          let t=e.team1+'vs'+e.team2
@@ -56,6 +60,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
             if (dt>45)
             {
                 let ta=dt-45
+                dt=dt-ta
                 m.time=''+dt+'+'+ta
             }else m.time=''+dt
         }
@@ -68,6 +73,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
             if (t>90)
             {
                 let ta=dt-105-m.timeAdd.part1
+                t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
         }

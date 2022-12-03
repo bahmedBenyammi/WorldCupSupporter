@@ -82,11 +82,11 @@ const matcheshema=new Schema({
     timeAdd:{
         part1:{
             type:Number,
-            default:2
+            default:5
         },
         part2:{
             type:Number,
-            default:2
+            default:5
         }
     },
 
@@ -100,7 +100,6 @@ const voteMatch= new Schema({
     email:{
         type:String,
         require:true,
-        unique:true
     },
     support:{
         type:Number,
@@ -117,6 +116,6 @@ const voteMatch= new Schema({
     match:{type:Types.ObjectId,ref:'Matche'}
 })
 export const Matche=mongoose.models.Matche||mongoose.model<IMatche>('Matche',matcheshema)
-export const VoteMatch=mongoose.models.VoteMatch||mongoose.model('VoteMatch',matcheshema)
-// export const VoteMatch=mongoose.model('VoteMatch',matcheshema)
+export const VoteMatch=mongoose.models.VoteMatch||mongoose.model('VoteMatch',voteMatch)
+// export const VoteMatch=mongoose.model('VoteMatch',voteMatch)
 // export const Matche=mongoose.model<IMatche>('Matche',matcheshema)
