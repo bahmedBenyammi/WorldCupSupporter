@@ -229,7 +229,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
                 <Flag country={Short[match.team2.replace(" ", "_")]}></Flag></div>
         </div>
         {match.round != "First-Round" && guesses}
-        <div className='flex justify-center items-center mt-4 flex-col lg:flex-row lg:space-x-2 space-y-2'>
+        <div className='flex justify-center items-center mt-4 flex-col lg:flex-row lg:space-x-2 space-y-2 lg:-space-y-0'>
             <Link href={lint()}>
                 <button type='button'
                         className="p-2 px-4 border w-48 rounded border-gray-400 border-2 hover:border-white
@@ -296,15 +296,8 @@ const PeopleGuess: FC<MatchProps> = ({m}) => {
         return "w-["+w+"%]".toString()
     }
     const guessCom = () => {
-        // @ts-ignore
-
-        // @ts-ignore
-        // console.log(guess!.w1===0&&guess!.w2===0)
-        // // @ts-ignore
-        // console.log(guess!.w1)
-        //  // @ts-ignore
         if (guess!.w1===0&&guess!.w2===0)
-             return <div className="flex justify-center items-center w-full  lg:px-4 ">
+             return <div className="flex justify-center items-center w-full  ">
                  <p>no guesses yet</p>
              </div>
         else
@@ -312,11 +305,13 @@ const PeopleGuess: FC<MatchProps> = ({m}) => {
             <div className="w-1/12 justify-start flex"><Flag country={Short[match.team1.replace(" ", "_")]}></Flag>
             </div>
             <div className="w-5/6 flex justify-center items-center">
-                <div className={"bg-red-500 h-6  flex items-center text-sm text-white px-1 justify-start "+withClass(guess!.w1)}>
+                <div style={{width:guess!.w1+"%"}}
+                    className={`bg-red-500 h-6  flex items-center text-sm text-white px-1 justify-start `} >
                     {guess?.w1+"%"}
                 </div>
 
-                <div className={"bg-blue-500 h-6  flex items-center text-sm text-white px-1 justify-end "+withClass(guess!.w2) }>
+                <div style={{width:guess!.w2+"%"}}
+                    className={"bg-blue-500 h-6  flex items-center text-sm text-white px-1 justify-end "+withClass(guess!.w2) }>
                     {guess?.w2+"%"}
                 </div>
             </div>
