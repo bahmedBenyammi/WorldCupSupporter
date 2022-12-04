@@ -17,10 +17,10 @@ export const matchStatistique=async (title:string,round:string):Promise<IStatist
     await db.getInestence()
      let teams:string[]=title.split('vs')
     let match
-    if(round==="First-Round")
+    if(round==="Groups Stage")
     match=await Matche.findOne({team1:teams[0],team2:teams[1],round:round})
     else
-        match=await Matche.findOne({team1:teams[0],team2:teams[1],round:{ $ne: "First-Round" }})
+        match=await Matche.findOne({team1:teams[0],team2:teams[1],round:{ $ne: "Groups Stage"}})
     const team1=Team.findOne({name:teams[0]})
     const team2=Team.findOne({name:teams[1]})
     match=setMatchTime(match._doc)
@@ -28,7 +28,7 @@ export const matchStatistique=async (title:string,round:string):Promise<IStatist
 
     let w1=VoteMatch.count({isComfire: true, support: 1 ,'match._id':match!._id})
     let w2=VoteMatch.count({isComfire: true, support: 2,'match._id':match!._id})
-    let d=round==='First-Round'? await VoteMatch.count({isComfire: true, support: 0}):0
+    let d=round==="Groups Stage"? await VoteMatch.count({isComfire: true, support: 0}):0
     let res={
          match:match as IMatche,
         team1:await team1,

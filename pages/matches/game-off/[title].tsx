@@ -60,8 +60,10 @@ const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
     }, [m])
     const score = (m: IMatche) => {
         if (m.isfinsh || m.isplay)
-            return <div className='flex justify-center items-center'>
+            return <div className='flex flex-col justify-center items-center'>
                 <p className='col-span-1 text-center lg:text-4xl text-2xl '>{m.score.team1 + " - " + m.score.team2}</p>
+                {m.isfinsh&&m.score.team1===m.score.team2 &&
+                    <p className='text-sm text-center'>{m.penalte.team1 + " - " + m.penalte.team2}</p>}
             </div>
         else return <p className='col-span-1 text-center text-4xl'>Vs</p>
     }

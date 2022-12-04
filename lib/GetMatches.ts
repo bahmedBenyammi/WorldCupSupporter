@@ -3,15 +3,14 @@ import {IMatche, Matche} from "../model/Matche";
 import db from "../model/Bd";
 import {now} from "mongoose";
 
-export const getMatches=async ():Promise<IMatche[]> => {
+export const getMatches=async (b:boolean):Promise<IMatche[]> => {
     await db.getInestence()
 
     var date = new Date();
     var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
         date.getUTCDate(), 0, 0, 0);
-    let matches= await Matche.find({date: {
-            $gte:new Date(now_utc)
-        }});
+    let query=b?{   $gte:new Date(now_utc)}:{"$lt":new Date(now_utc)}
+    let matches= await Matche.find({date: query});
     matches.sort((a,b)=>{return a.date.valueOf() - b.date.valueOf()})
   return matches.map(e=>{
        return  setMatchTime(e._doc)
@@ -27,10 +26,10 @@ export interface MatchParam {
 export const getAllMatcheTitle=async (round:string):Promise<MatchParam[]> => {
     await db.getInestence()
     let matches
-    if(round==="First-Round")
+    if(round==="Groups Stage")
         matches= await Matche.find({round:round});
     else
-        matches= await Matche.find({round:{ $ne: "First-Round" }});
+        matches= await Matche.find({round:{ $ne: "Groups Stage" }});
 
     var titles:MatchParam[]=[]
         matches.forEach(e=>{
@@ -45,7 +44,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
     m.isplay=true
     let totalTime=105+m.timeAdd.part1+m.timeAdd.part2
 
-    if(m.round!="First-Round"&&(m.score.team1===m.score.team2))
+    if(m.round!="Groups Stage"&&(m.score.team1===m.score.team2))
         totalTime=totalTime+50+m.timeAdd.part3+m.timeAdd.part4
 
 

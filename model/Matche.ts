@@ -94,6 +94,17 @@ const matcheshema=new Schema({
                 require:true
             }
 
+        }],
+        team2:[{
+            palayer:{
+                type:String,
+                require:true
+            },
+            time:{
+                type:Number,
+                require:true
+            }
+
         }]
     },
     timeAdd:{

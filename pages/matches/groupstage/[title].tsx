@@ -9,9 +9,7 @@ import {getTime} from "../../../lib/TimeLib";
 import Head from "next/head";
 import {IMatche} from "../../../model/Matche";
 import {IoIosTimer} from "react-icons/io";
-import {VoteModle} from "../../../components/VoteModle";
-import {GlobelVoteForm, MatchVoteForm} from "../../../components/FormVote";
-import {IMatchVote} from "../../../lib/voteCalcul";
+
 
 const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
     const dateRef = useRef<HTMLParagraphElement>(null)
@@ -158,12 +156,12 @@ const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
 }
 
 export async function getStaticPaths() {
-    let paths = await getAllMatcheTitle("First-Round")
+    let paths = await getAllMatcheTitle("Groups Stage")
     return {paths, fallback: false}
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-    let s = await matchStatistique(params!.title as string, "First-Round")
+    let s = await matchStatistique(params!.title as string, "Groups Stage")
 
     // params contains the post `id`.
     // If the route is like /posts/1, then params.id i s 1

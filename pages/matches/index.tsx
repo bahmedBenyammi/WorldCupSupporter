@@ -3,17 +3,15 @@ import Navbar from "../../components/Navbar";
 import NavMathes from "../../components/NavMathes";
 import Flag from "react-flagkit";
 
-import React, {FC, useEffect, useMemo, useState} from "react";
+import React, {FC, useEffect, useMemo, useRef, useState} from "react";
 import {IMatche} from "../../model/Matche";
 import {Short} from "../../components/Country";
 import Head from "next/head";
 import {getTime} from "../../lib/TimeLib";
 import Link from "next/link";
 import {IoIosTimer} from "react-icons/io";
-import * as url from "url";
 import {VoteModle} from "../../components/VoteModle";
 import {MatchVoteForm} from "../../components/FormVote";
-import {IMatchVote} from "../../lib/voteCalcul";
 import {MatchProps, PeopleGuess} from "../../components/PeopleGuess";
 
 
@@ -21,11 +19,29 @@ interface DayMatche {
     day: string
     matches: IMatche[]
 }
+const Matches = (matches:DayMatche[],showModle:any,m:any) => {
+    return <div className=" bg-gray-100 md:pb-2 px-1 pb-2 lg:px-12" ref={m}>
 
-const Matches: NextPage = () => {
+        {matches.map(e => {
+            return <div className="border mb-2 justify-items-center shadow bg-white flex flex-col  justify-center"
+                        key={e.day}>
+                <p className="p-4 font-bold text-center">{e.day}</p>
+                <div className="w-full grid md:grid-cols-2  grid-cols-1 justify-center md:p-2  px-1 py-2">
+                    {e.matches.map(m => {
+                        return <Match m={m} key={m._id!.toString()} showModle={showModle}/>
+                    })}
+                </div>
+            </div>
+        })}
+
+    </div>
+}
+
+const MatchesPage: NextPage = () => {
     const [matches, setMatches] = useState<DayMatche[]>([])
     const [showVote, setShowVote] = useState(false)
     const [display, setdisplay] = useState(false)
+    const m=useRef()
     const [match, setMatch] = useState<IMatche | undefined>(undefined)
     const showModle = (m: IMatche) => {
         setMatch(m)
@@ -34,20 +50,14 @@ const Matches: NextPage = () => {
     const closeModel = () => {
         setShowVote(false)
     }
-
-
     useEffect(() => {
         fetch('/api/matchSchedule').then(res => {
             return res.json()
         }).then(res => {
-
             setMatches(matcheDay(res.matches as IMatche[]))
             setdisplay(true)
-
         })
-
     }, [])
-
     const wait = () => {
         return <div className="fill-pageWait">
             <div className=" bg-gray-100 p-2 h-full w-full md:px-12 space-y-4">
@@ -59,16 +69,11 @@ const Matches: NextPage = () => {
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
                             <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
                         </div>
-
                         <p className='col-span-1 text-center'>Vs</p>
                         <div className="flex items-center space-x-2 col-span-2 justify-end">
-
                             <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
                         </div>
-
-
                     </div>
                     <div
                         className=" m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
@@ -76,16 +81,11 @@ const Matches: NextPage = () => {
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
                             <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
                         </div>
-
                         <p className='col-span-1 text-center'>Vs</p>
                         <div className="flex items-center space-x-2 col-span-2 justify-end">
-
                             <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
                         </div>
-
-
                     </div>
                 </div>
                 <div
@@ -96,16 +96,11 @@ const Matches: NextPage = () => {
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
                             <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
                         </div>
-
                         <p className='col-span-1 text-center'>Vs</p>
                         <div className="flex items-center space-x-2 col-span-2 justify-end">
-
                             <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
                         </div>
-
-
                     </div>
                     <div
                         className="m-2 shadow flex items-center p-4 grid grid-cols-5 justify-between w-full justify-self-center">
@@ -113,37 +108,15 @@ const Matches: NextPage = () => {
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
                             <div className="rounded-full w-28 bg-gray-300 h-4 "></div>
                         </div>
-
                         <p className='col-span-1 text-center'>Vs</p>
                         <div className="flex items-center space-x-2 col-span-2 justify-end">
-
                             <div className="rounded-full  bg-gray-300 h-4 w-28"></div>
                             <div className="rounded-full  bg-gray-300 h-8 w-8"></div>
-
                         </div>
 
-
                     </div>
                 </div>
-
-
             </div>
-        </div>
-    }
-    const Matches = () => {
-        return <div className=" bg-gray-100 md:p-2 px-1 py-2 lg:px-12">
-            {matches.map(e => {
-                return <div className="border mb-2 justify-items-center shadow bg-white flex flex-col  justify-center"
-                            key={e.day}>
-                    <p className="p-4 font-bold text-center">{e.day}</p>
-                    <div className="w-full grid md:grid-cols-2  grid-cols-1 justify-center md:p-2  px-1 py-2">
-                        {e.matches.map(m => {
-                            return <Match m={m} key={m._id!.toString()} showModle={showModle}/>
-                        })}
-                    </div>
-                </div>
-            })}
-
         </div>
     }
 
@@ -160,19 +133,49 @@ const Matches: NextPage = () => {
             </Head>
             <Navbar border={false} sticky={false}/>
             <NavMathes/>
-            {display ? Matches() : wait()}
+            {display ? <>  <OldMatches showModel={showModle} m={m}></OldMatches>{Matches(matches,showModle,m)}</> : wait()}
             {showVote && <VoteModle handleClose={closeModel}><MatchVoteForm match={match!}/></VoteModle>}
         </div>
     )
 }
+interface IOld{
+    showModel:any
+    m:any
+}
+const OldMatches:FC<IOld>=({showModel,m})=>{
+    const [matches, setMatches] = useState<DayMatche[]>([])
+    const [status,setStatus]=useState("none")
+    const handleClick=()=>{
+        setStatus("wait")
+        fetch('/api/OldMatch').then(res => {
+            return res.json()
+        }).then(res => {
+
+            setMatches(matcheDay(res.matches as IMatche[]))
+            setStatus("")
+            if (window.scrollY>m.current.offsetTop)
+            window.scrollTo(0,window.scrollY)
+            else
+            window.scrollTo(0,m.current.offsetTop)
 
 
+        })
+    }
+    if (status==="none")
+    return<button onClick={handleClick} className='w-full bg-white h-10 shadow my-1  border hover:bg-gray-100 hover:text-blue-500'>
+        Old Matches</button>
+    else if (status==="wait")
+        return <div className="h-10 bg-white my-1 animate-ping">
+
+        </div>
+    else return Matches(matches,showModel,undefined)
+}
 const Match: FC<MatchProps> = ({m, showModle}) => {
 
     const [match, setMatch] = useState(m)
     const lint = () => {
         let link
-        if (match.round === "First-Round")
+        if (match.round === "Groups Stage")
             link = "/matches/groupstage/"
         else
             link = "/matches/game-off/"
@@ -191,11 +194,14 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
                     setMatch(data.match)
                 })
             }, 1000 * 60)
-        console.log("repeat")
+
     }, [match])
     const score = (m: IMatche) => {
         if (m.isfinsh || m.isplay)
-            return <p className='col-span-1 text-center'>{m.score.team1 + " - " + m.score.team2}</p>
+            return <div className="flex flex-col justify-items-center">
+                <p className=' text-center'>{m.score.team1 + " - " + m.score.team2}</p>
+                {m.isfinsh&&m.score.team1===m.score.team2 &&m.round!="Groups Stage"&&
+                    <p className='text-sm text-center'>{m.penalte.team1 + " - " + m.penalte.team2}</p>}</div>
         else return <p className='col-span-1 text-center'>Vs</p>
     }
     const time = (m: IMatche) => {
@@ -211,6 +217,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
     return (<div
         className="md:p-4 p-1 py-2 md:m-2 mx-1 my-2 shadow flex-col border rounded hover:bg-gray-50 col-span-1"
     >
+        <p className='font-bold text-sm text-center'>{match.round}</p>
         {time(match)}
         <div
             className="flex items-center p-2 grid grid-cols-5 justify-between w-full justify-self-center">
@@ -224,7 +231,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
                 <p>{match.team2}</p>
                 <Flag country={Short[match.team2.replace(" ", "_")]}></Flag></div>
         </div>
-        {match.round != "First-Round" && guesses}
+        {match.round != "Groups Stage" && guesses}
         <div className='flex justify-center items-center mt-4 flex-col lg:flex-row lg:space-x-2 space-y-2 lg:-space-y-0'>
             <Link href={lint()}>
                 <button type='button'
@@ -233,7 +240,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
                 >View more
                 </button>
             </Link>
-            {match.round != "First-Round" &&match.date.getTime()>Date.now()&& <button type='button' onClick={() => {
+            {match.round != "Groups Stage" &&(new Date(match.date)).getTime()>Date.now()&& <button type='button' onClick={() => {
                 showModle!(m)
             }} className="p-2 px-4 border  w-48 rounded border-gray-400 border-2 hover:border-white
                                            hover:bg-blue-400 hover:text-white"
@@ -267,4 +274,4 @@ const matcheDay = (matches: IMatche[]): DayMatche[] => {
 }
 
 
-export default Matches
+export default MatchesPage
