@@ -95,7 +95,7 @@ export interface IConfirmeVM {
 export const confirmeVoteMatch = async (email: string, id: string, match: String): Promise<IConfirmeVM> => {
     await db.getInestence()
     let vote = await VoteMatch.findOne({email: email, match: match}).populate('match')
-    let noFound = {text: "not found", support: "", agains: ""}
+    let noFound = {text: "not found", support: "", agains: "",link:""}
     if (vote === null)
         return noFound
 
