@@ -233,7 +233,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
                 >View more
                 </button>
             </Link>
-            {match.round != "First-Round" &&match.date.getTime()>Date.now()&& <button type='button' onClick={() => {
+            {match.round != "First-Round" &&(new Date(match.date)).getTime()>Date.now()&& <button type='button' onClick={() => {
                 showModle!(m)
             }} className="p-2 px-4 border  w-48 rounded border-gray-400 border-2 hover:border-white
                                            hover:bg-blue-400 hover:text-white"
