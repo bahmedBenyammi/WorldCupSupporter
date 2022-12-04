@@ -19,6 +19,10 @@ export interface IMatche {
         team1:number,
         team2:number
     },
+    penalte:{
+        team1:number,
+        team2:number
+    },
     goals:{
         team1:IGoal[],
         team2:IGoal[],
@@ -26,6 +30,8 @@ export interface IMatche {
     timeAdd:{
         part1:number,
         part2:number,
+        part3:number,
+        part4:number,
     }
 }
 const matcheshema=new Schema({
@@ -66,6 +72,17 @@ const matcheshema=new Schema({
 
         }
     },
+    penalte:{
+        team1:{
+            type : Number,
+            default:0
+        },
+        team2:{
+            type : Number,
+            default:0,
+
+        }
+    },
     goals:{
         team1:[{
             palayer:{
@@ -85,6 +102,14 @@ const matcheshema=new Schema({
             default:5
         },
         part2:{
+            type:Number,
+            default:5
+        },
+        part3:{
+            type:Number,
+            default:5
+        },
+        part5:{
             type:Number,
             default:5
         }

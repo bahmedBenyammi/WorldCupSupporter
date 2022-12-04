@@ -4,13 +4,14 @@ import Navbar from "../../../components/Navbar";
 import {IStatistique, matchStatistique} from "../../../lib/matchStatistique";
 import Flag from "react-flagkit";
 import {Short} from "../../../components/Country";
-import {useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import {getTime} from "../../../lib/TimeLib";
 import Head from "next/head";
 import {IMatche} from "../../../model/Matche";
 import {IoIosTimer} from "react-icons/io";
 import {VoteModle} from "../../../components/VoteModle";
 import {GlobelVoteForm, MatchVoteForm} from "../../../components/FormVote";
+import {IMatchVote} from "../../../lib/voteCalcul";
 
 const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
     const dateRef = useRef<HTMLParagraphElement>(null)

@@ -44,10 +44,16 @@ export const setMatchTime=(m:IMatche):IMatche=>{
 
     m.isplay=true
     let totalTime=105+m.timeAdd.part1+m.timeAdd.part2
+
+    if(m.round!="First-Round"&&(m.score.team1===m.score.team2))
+        totalTime=totalTime+50+m.timeAdd.part3+m.timeAdd.part4
+
+
     if (!m.isfinsh){
         let localDatenow=new Date()
         let now =new Date(localDatenow.toUTCString())
         let dt = Math.trunc((now.getTime() - m.date.getTime()) / (60 * 1000));
+
         if ((m.date.toDateString() !=now.toDateString())&&(now.getTime()-m.date.getTime()< 0)||dt<0) {
             m.isplay = false
 
@@ -68,16 +74,46 @@ export const setMatchTime=(m:IMatche):IMatche=>{
             m.time='Half-time'
         else if (dt-15-m.timeAdd.part1<=90 + m.timeAdd.part2)
         {
+            console.log("part2")
             let t=dt-15-m.timeAdd.part1
             console.log(dt)
             if (t>90)
             {
-                let ta=dt-105-m.timeAdd.part1
+                let ta=t-90
                 t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
-        }
+        }  else if (dt<105+m.timeAdd.part1+m.timeAdd.part2)
+            m.time='Half-time'
+        else if (dt-30-m.timeAdd.part1-m.timeAdd.part2<=105 + m.timeAdd.part3)
+        {
+            console.log("part3")
 
+            let t=dt-30-m.timeAdd.part1-m.timeAdd.part2
+
+            if (t>105)
+            {
+                let ta=t-105
+                t=t-ta
+                m.time=''+t+'+'+ta
+            }else m.time=''+t
+        }else if (dt<125+m.timeAdd.part1+m.timeAdd.part2+m.timeAdd.part4)
+            m.time='Half-time'
+        else if (dt-35-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3<=120 + m.timeAdd.part4)
+        {
+            console.log("part4")
+
+            let t=dt-35-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3
+            console.log(t)
+            if (t>120)
+            {
+                let ta=t-120
+                t=t-ta
+
+                console.log(ta)
+                m.time=''+t+'+'+ta
+            }else m.time=''+t
+        }
     }
 
     return m;

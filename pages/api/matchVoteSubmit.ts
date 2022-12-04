@@ -8,6 +8,7 @@ import bcrypt from 'bcrypt'
 
 import {Matche, VoteMatch} from "../../model/Matche";
 import {id} from "postcss-selector-parser";
+import {match} from "assert";
 
 export default async function handler(
     req: NextApiRequest,
@@ -36,8 +37,9 @@ export default async function handler(
         console.log(vote)
         vote = await vote.save()
         console.log(vote)
-        let text=support===1?"will win agains "+m!.team1:support===2?"will win against "+m!.team2:'no one will win in match'
+        let text=support===1?"will win agains "+m!.team2:support===2?"will win against "+m!.team1:'no one will win in match'
         +m!.team1+" vs "+m!.team2
+        text=text+" "+m.round+" of world cup 2022"
         let team=support===1?m!.team1:support===2?m!.team2:m!.team1+" vs "+m!.team2
 
         const salt = await bcrypt.genSalt(10)

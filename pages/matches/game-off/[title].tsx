@@ -4,13 +4,14 @@ import Navbar from "../../../components/Navbar";
 import {IStatistique, matchStatistique} from "../../../lib/matchStatistique";
 import Flag from "react-flagkit";
 import {Short} from "../../../components/Country";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import {getTime} from "../../../lib/TimeLib";
 import Head from "next/head";
 import {IMatche} from "../../../model/Matche";
 import {IoIosTimer} from "react-icons/io";
 import {VoteModle} from "../../../components/VoteModle";
 import { MatchVoteForm} from "../../../components/FormVote";
+import {PeopleGuess} from "../../../components/PeopleGuess";
 
 const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
     const dateRef = useRef<HTMLParagraphElement>(null)
@@ -45,6 +46,9 @@ const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
         })
 
     }
+    const guesses = useMemo(() => {
+        return <PeopleGuess m={match}/>
+    }, [])
     useEffect(() => {
         console.log('ok')
         console.log(m.isplay && !m.isfinsh && updateT)
@@ -75,7 +79,7 @@ const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
         <Head>
             <title>{team1.name + ' vs ' + team2.name}</title>
             <meta name="description"
-                  content={team1.name + ' vs ' + team2.name + ' group stage Qatar 2022 guess who will win and win'}
+                  content={team1.name + ' vs ' + team2.name + ' '+match.round+' in world cup Qatar 2022 guess who will win and win'}
                   key="desc"/>
             <meta property="og:title" content={team1.name + ' vs ' + team2.name + ' group stage Qatar 2022'}/>
         </Head>
@@ -101,28 +105,15 @@ const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
                 </div>
                 <div className="flex flex-col items-center lg:px-36">
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <p className="p-4 text-xl">People's guesses</p>
-                    <div className="flex justify-center items-center w-full  px-4 ">
-                        <div className="w-1/12 justify-start flex"><Flag
-                            country={Short[match.team1.replace(" ", "_")]}></Flag></div>
-                        <div className="w-5/6 flex justify-center items-center">
-                            <div
-                                className="bg-blue-500 h-6 w-[55.5%] flex items-center text-sm text-white px-2 text-start">55.5%
-                            </div>
 
-                            <div
-                                className="bg-red-500 h-6 w-[44.5%] flex items-center text-sm text-white px-1 justify-end">44.5%
-                            </div>
-                        </div>
-                        <div className="w-1/12 justify-end flex"><Flag country={Short[match.team2.replace(" ", "_")]}>
-                        </Flag></div>
+                    {match.round != "First-Round" && guesses}
 
-                    </div>
                     <div className="p-4">
-                        <button type='button' onClick={showModle}
+                        {match.round != "First-Round" &&(new Date(match.date)).getTime()>Date.now()&&
+                            <button type='button' onClick={showModle}
                                 className="p-2 px-4 border rounded border-gray-400 border-2 hover:border-white
                                            hover:bg-blue-400 hover:text-white">Guess who will win
-                        </button>
+                        </button>}
                     </div>
                 </div>
                 <div className="flex justify-center items-center">

@@ -1,7 +1,7 @@
 import {GetServerSideProps, NextPage} from "next";
 
 import Link from "next/link";
-import {confirmeGlobal} from "../lib/GlobalVote";
+
 import {Short} from "../components/Country";
 import Flag from "react-flagkit";
 import Head from "next/head";
@@ -9,16 +9,13 @@ import {
     FacebookIcon,
     FacebookShareButton, RedditIcon,
     RedditShareButton,
-    TelegramIcon,
     TwitterIcon,
     TwitterShareButton
 } from "react-share";
 import Navbar from "../components/Navbar";
 import {confirmeVoteMatch, IConfirmeVM} from "../lib/voteCalcul";
-interface PropsConfirme{
-    country:string
-}
-const Confirme: NextPage<IConfirmeVM> = ({agains,support}) => {
+
+const Confirme: NextPage<IConfirmeVM> = ({agains,support,link}) => {
 
     return(
         <>
@@ -35,10 +32,10 @@ const Confirme: NextPage<IConfirmeVM> = ({agains,support}) => {
                     <Flag className='h-40 w-40' country={Short[support.replace(" ","_")]} />
                     {/*<Flag className='h-40 w-40' country={Short['DZ']} />*/}
                     <p className="text-xl m-2 font-bold">{support}</p>
-                    <p className="text-xl font-bold">again </p>
+                    <p className="text-xl font-bold">{"in his match agains "+agains }</p>
 
                     {/*<p className="text-xl m-2 font-bold">Algeria</p>*/}
-                    <div className='flex justify-center items-center space-x-4'>
+                    <div className='flex justify-center items-center space-x-4 p-4'>
                         <p>Share in :</p>
                         <FacebookShareButton url={ 'https://footballsuppurters.com'} quote="hi" contextMenu={'dd'}
                                              hashtag={"#worldcup2022"}>
@@ -52,8 +49,8 @@ const Confirme: NextPage<IConfirmeVM> = ({agains,support}) => {
                         </RedditShareButton>
 
                     </div>
-                    <p className="m-2 font-bold">consulte the global ranking from
-                        <Link href={'/'} ><span className="text-blue-500 hover:cursor-pointer"> here</span></Link>
+                    <p className="m-2 font-bold">view more
+                        <Link href={link} ><span className="text-blue-500 hover:cursor-pointer"> here</span></Link>
                     </p>
                 </div>
             </div></>)

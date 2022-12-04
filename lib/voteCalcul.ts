@@ -88,7 +88,8 @@ class VoteCalculator {
 export interface IConfirmeVM {
     text: string,
     support: string,
-    agains: string
+    agains: string,
+    link:string
 }
 
 export const confirmeVoteMatch = async (email: string, id: string, match: String): Promise<IConfirmeVM> => {
@@ -105,12 +106,15 @@ export const confirmeVoteMatch = async (email: string, id: string, match: String
     let s = vote.support === 1 ? vote!.match!.team1! : vote!.match!.team2!
     // @ts-ignore
     let a = vote.support === 1 ? vote!.match!.team2! : vote!.match!.team1!
+    a=a+" in "+vote!.match!.round+" of world cup 2022"
+    let l="/matches/game-off/"+vote!.match!.team1!+"vs"+vote!.match!.team2!
     vote.isComfire = true
     vote.save()
     console.log("vote confirm : " + vote._id.toString())
     return {
         text: "ok",
         support: s,
-        agains: a
+        agains: a,
+        link:l
     }
 }
