@@ -222,18 +222,19 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
         <div
             className="flex items-center p-2 grid grid-cols-5 justify-between w-full justify-self-center">
             <div className="flex items-center space-x-2 col-span-2">
+                {match.team1===" "?<p>NAN</p>:<>
                 <Flag country={Short[match.team1.replace(" ", "_")]}></Flag>
-                <p>{match.team1}</p>
+                <p>{match.team1}</p></>}
             </div>
             {score(match)}
 
             <div className="flex items-center space-x-2 col-span-2 justify-end">
-                <p>{match.team2}</p>
-                <Flag country={Short[match.team2.replace(" ", "_")]}></Flag></div>
-        </div>
+                {match.team2===" "? <p>NAN</p>:<><p>{match.team2}</p>
+                <Flag country={Short[match.team2.replace(" ", "_")]}></Flag></>}
+            </div></div>
         {match.round != "Groups Stage" && guesses}
-        <div className='flex justify-center items-center mt-4 flex-col lg:flex-row lg:space-x-2 space-y-2 lg:-space-y-0'>
-            <Link href={lint()}>
+        {match.team1!=" "&&match.team2!=" "&&<div className='flex justify-center items-center mt-4 flex-col lg:flex-row lg:space-x-2 space-y-2 lg:-space-y-0'>
+              <Link href={lint()}>
                 <button type='button'
                         className="p-2 px-4 border w-48 rounded border-gray-400 border-2 hover:border-white
                                            hover:bg-blue-400 hover:text-white"
@@ -246,7 +247,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
                                            hover:bg-blue-400 hover:text-white"
             >Guess who will win
             </button>}
-        </div>
+        </div>}
     </div>)
 }
 const matcheDay = (matches: IMatche[]): DayMatche[] => {

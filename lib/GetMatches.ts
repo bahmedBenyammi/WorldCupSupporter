@@ -29,7 +29,7 @@ export const getAllMatcheTitle=async (round:string):Promise<MatchParam[]> => {
     if(round==="Groups Stage")
         matches= await Matche.find({round:round});
     else
-        matches= await Matche.find({round:{ $ne: "Groups Stage" }});
+        matches= await Matche.find({round:{ $ne: "Groups Stage" },team1:{ $ne: " " },team2:{ $ne: " " }});
 
     var titles:MatchParam[]=[]
         matches.forEach(e=>{

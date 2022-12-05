@@ -79,9 +79,9 @@ const Title: NextPage<IStatistique> = ({team1, team2, match}) => {
     }
     return <div>
         <Head>
-            <title>{team1.name + ' vs ' + team2.name}</title>
+            <title>{team1.name + ' vs ' + team2.name+" "+match.round +" of world cup 2022"}</title>
             <meta name="description"
-                  content={team1.name + ' vs ' + team2.name + ' '+match.round+' in world cup Qatar 2022 guess who will win and win'}
+                  content={team1.name + ' vs ' + team2.name + ' '+match.round+' of world cup Qatar 2022 guess who will win and win'}
                   key="desc"/>
             <meta property="og:title" content={team1.name + ' vs ' + team2.name + ' group stage Qatar 2022'}/>
         </Head>

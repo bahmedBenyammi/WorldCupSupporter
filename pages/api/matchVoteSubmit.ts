@@ -39,7 +39,7 @@ export default async function handler(
         console.log(vote)
         let text=support===1?"will win agains "+m!.team2:support===2?"will win against "+m!.team1:'no one will win in match'
         +m!.team1+" vs "+m!.team2
-        text=text+" "+m.round+" of world cup 2022"
+        text=text+" in "+m.round+" of world cup 2022"
         let team=support===1?m!.team1:support===2?m!.team2:m!.team1+" vs "+m!.team2
 
         const salt = await bcrypt.genSalt(10)
