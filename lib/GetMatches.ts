@@ -71,9 +71,10 @@ export const setMatchTime=(m:IMatche):IMatche=>{
         }
         else if (dt<60+m.timeAdd.part1)
             m.time='Half-time'
-        else if (dt-15-m.timeAdd.part1<=90 + m.timeAdd.part2)
+        else if (dt-15-m.timeAdd.part1<90 + m.timeAdd.part2)
         {
             console.log("part2")
+            console.log(dt)
             let t=dt-15-m.timeAdd.part1
             console.log(dt)
             if (t>90)
@@ -82,27 +83,23 @@ export const setMatchTime=(m:IMatche):IMatche=>{
                 t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
-        }  else if (dt<105+m.timeAdd.part1+m.timeAdd.part2)
-            m.time='Half-time'
+        }  else if (dt<120+m.timeAdd.part1+m.timeAdd.part2)
+            m.time='End of 90'
         else if (dt-30-m.timeAdd.part1-m.timeAdd.part2<=105 + m.timeAdd.part3)
         {
-            console.log("part3")
-
             let t=dt-30-m.timeAdd.part1-m.timeAdd.part2
-
             if (t>105)
             {
                 let ta=t-105
                 t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
-        }else if (dt<125+m.timeAdd.part1+m.timeAdd.part2+m.timeAdd.part4)
-            m.time='Half-time'
-        else if (dt-35-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3<=120 + m.timeAdd.part4)
+        }
+        else if (dt-30-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3<=120 + m.timeAdd.part4)
         {
             console.log("part4")
-
-            let t=dt-35-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3
+            console.log()
+            let t=dt-30-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3
             console.log(t)
             if (t>120)
             {
