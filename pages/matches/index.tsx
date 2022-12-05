@@ -199,7 +199,7 @@ const Match: FC<MatchProps> = ({m, showModle}) => {
     const score = (m: IMatche) => {
         if (m.isfinsh || m.isplay)
             return <div className="flex flex-col justify-items-center">
-                <p className=' text-center'>{m.score.team1 + " - " + m.score.team2}</p>
+                <p className=' text-center text-xl'>{m.score.team1 + " - " + m.score.team2}</p>
                 {m.isfinsh&&m.score.team1===m.score.team2 &&m.round!="Groups Stage"&&
                     <p className='text-sm text-center'>{m.penalte.team1 + " - " + m.penalte.team2}</p>}</div>
         else return <p className='col-span-1 text-center'>Vs</p>
