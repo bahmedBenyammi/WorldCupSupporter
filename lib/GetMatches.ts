@@ -83,11 +83,11 @@ export const setMatchTime=(m:IMatche):IMatche=>{
                 t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
-        }  else if (dt<120+m.timeAdd.part1+m.timeAdd.part2)
+        }  else if (dt<95+m.timeAdd.part1+m.timeAdd.part2)
             m.time='End of 90'
-        else if (dt-30-m.timeAdd.part1-m.timeAdd.part2<=105 + m.timeAdd.part3)
+        else if (dt-20-m.timeAdd.part1-m.timeAdd.part2<=105 + m.timeAdd.part3)
         {
-            let t=dt-30-m.timeAdd.part1-m.timeAdd.part2
+            let t=dt-20-m.timeAdd.part1-m.timeAdd.part2
             if (t>105)
             {
                 let ta=t-105
@@ -95,11 +95,10 @@ export const setMatchTime=(m:IMatche):IMatche=>{
                 m.time=''+t+'+'+ta
             }else m.time=''+t
         }
-        else if (dt-30-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3<=120 + m.timeAdd.part4)
+        else if (dt-20-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3<=120 + m.timeAdd.part4)
         {
-            console.log("part4")
-            console.log()
-            let t=dt-30-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3
+
+            let t=dt-20-m.timeAdd.part1-m.timeAdd.part2-m.timeAdd.part3
             console.log(t)
             if (t>120)
             {
