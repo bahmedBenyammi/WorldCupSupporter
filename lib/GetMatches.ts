@@ -104,7 +104,6 @@ export const setMatchTime=(m:IMatche):IMatche=>{
             {
                 let ta=t-120
                 t=t-ta
-
                 console.log(ta)
                 m.time=''+t+'+'+ta
             }else m.time=''+t
