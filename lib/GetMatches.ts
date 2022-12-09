@@ -44,7 +44,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
     m.isplay=true
     let totalTime=105+m.timeAdd.part1+m.timeAdd.part2
 
-    if(m.round!="Groups Stage"&&(m.score.team1===m.score.team2))
+    if(m.round!="Groups Stage"&&(m.score.team1===m.score.team2)||m.extraTime)
         totalTime=totalTime+50+m.timeAdd.part3+m.timeAdd.part4
 
 

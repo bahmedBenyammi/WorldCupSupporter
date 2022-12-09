@@ -83,6 +83,10 @@ const matcheshema=new Schema({
 
         }
     },
+    extraTime:{
+        type:Boolean,
+        default:false,
+},
     goals:{
         team1:[{
             palayer:{
