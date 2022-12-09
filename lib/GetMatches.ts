@@ -83,7 +83,7 @@ export const setMatchTime=(m:IMatche):IMatche=>{
                 t=t-ta
                 m.time=''+t+'+'+ta
             }else m.time=''+t
-        }  else if (dt<95+m.timeAdd.part1+m.timeAdd.part2)
+        }  else if (dt<110+m.timeAdd.part1+m.timeAdd.part2)
             m.time='End of 90'
         else if (dt-20-m.timeAdd.part1-m.timeAdd.part2<=105 + m.timeAdd.part3)
         {
