@@ -7,8 +7,8 @@ export const getMatches=async (b:boolean):Promise<IMatche[]> => {
     await db.getInestence()
 
     var date = new Date();
-    var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
-        date.getUTCDate(), 0, 0, 0);
+    var now_utc = Date.UTC(2022, 11,
+       17, 0, 0, 0);
     let query=b?{   $gte:new Date(now_utc)}:{"$lt":new Date(now_utc)}
     let matches= await Matche.find({date: query});
     matches.sort((a,b)=>{return a.date.valueOf() - b.date.valueOf()})
